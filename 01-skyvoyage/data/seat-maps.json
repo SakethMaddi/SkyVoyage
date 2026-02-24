@@ -1,0 +1,7 @@
+{
+  "A320":{"rows":30,"columns":["A","B","C","D","E","F"],"aisleAfter":["C"],"businessRows":[1,2,3,4],"exitRows":[12,13],"occupied":["1A","1B","3C","5D","7F","8A","10B","12C","14E","15A","17D","19F","21A","22B","24C","26E","28F"]},
+  "A380":{"rows":45,"columns":["A","B","C","D","E","F","G","H","J","K"],"aisleAfter":["C","G"],"businessRows":[1,2,3,4,5,6],"exitRows":[20,21],"occupied":["1A","2B","3C","4D","5K","6J","8A","9F","10G","12B","14C","15H","17K","19A","20D","22E","24F","26G","28H","30A","32B","34K","36C","38D","40J","42A","43F","44G","45B","45K"]},
+  "B737":{"rows":26,"columns":["A","B","C","D","E","F"],"aisleAfter":["C"],"businessRows":[1,2,3],"exitRows":[10,11],"occupied":["1A","2C","4D","6F","8B","10A","12E","14C","16F","18A","20D","22B","24E","26C"]},
+  "B777":{"rows":40,"columns":["A","B","C","D","E","F","G","H","J"],"aisleAfter":["C","F"],"businessRows":[1,2,3,4,5],"exitRows":[18,19],"occupied":["1A","2C","3F","4J","5H","7B","9D","11G","13A","15E","17H","19C","21F","23A","25D","27G","29B","31J","33E","35A","37C","39F","40H","38D","36B"]},
+  "B787":{"rows":35,"columns":["A","B","C","D","E","F","G","H","J"],"aisleAfter":["C","F"],"businessRows":[1,2,3,4,5],"exitRows":[15,16],"occupied":["1A","2J","3C","4F","6B","8D","10G","12H","14A","16E","18C","20F","22J","24B","26D","28G","30A","32H","34E","35C"]}
+}

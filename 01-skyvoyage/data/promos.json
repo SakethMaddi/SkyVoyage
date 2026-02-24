@@ -1,0 +1,8 @@
+[
+  {"code":"SKY2026","type":"percentage","value":10,"description":"10% off your booking","expiryDate":"2026-12-31","minPurchase":200},
+  {"code":"FLYAWAY50","type":"fixed","value":50,"description":"$50 off your booking","expiryDate":"2026-06-30","minPurchase":300},
+  {"code":"WELCOME15","type":"percentage","value":15,"description":"15% off for new customers","expiryDate":"2026-09-30","minPurchase":0},
+  {"code":"SUMMER25","type":"percentage","value":25,"description":"25% summer discount","expiryDate":"2026-08-31","minPurchase":500},
+  {"code":"SAVE100","type":"fixed","value":100,"description":"$100 off premium bookings","expiryDate":"2026-12-31","minPurchase":800},
+  {"code":"EARLYBIRD","type":"percentage","value":20,"description":"20% off early bookings","expiryDate":"2026-04-30","minPurchase":150}
+]

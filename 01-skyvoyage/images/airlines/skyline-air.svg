@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
+  <path d="M5 30L15 10L25 20L35 8" stroke="#1e40af" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30 15L38 12L32 18" fill="#1e40af"/>
+  <text x="42" y="25" font-family="system-ui" font-size="13" font-weight="600" fill="#1e40af">Skyline Air</text>
+</svg>

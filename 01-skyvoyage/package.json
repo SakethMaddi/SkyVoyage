@@ -1,0 +1,9 @@
+{
+  "name": "skyvoyage-starter",
+  "version": "1.0.0",
+  "description": "SkyVoyage Flight Booking Platform — Student Starter Template",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --cors"
+  }
+}
