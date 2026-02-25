@@ -23,8 +23,55 @@
   </header>
 
   <main>
-    <!-- Hero section with search form -->
-    <!-- Results section with filter sidebar, flight cards, sort, and pagination -->
+    <section class="hero">
+      <div class="hero_section">
+         <h1>Where will you fly next?</h1>
+         <p class="hero_section_p">Search thousands of flights and find the best deals</p>
+         <form action="" class="Flight_search_form">
+          <div class="search_form">
+            <div class="serach_form_field">
+              <label for="from_input" class="serach_form_label">From</label>
+              <input type="text" class="serach_form_input" placeholder="City or Airpot">
+            </div>
+            <button class="search_form_switch_btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide_arrow"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+            </button>
+            <div class="serach_form_field">
+              <label for="from_input" class="serach_form_label">TO</label>
+              <input type="text" class="serach_form_input" placeholder="City or Airpot">
+            </div>
+            <div class="serach_form_field">
+              <label for="from_input" class="serach_form_label">Departure Date</label>
+              <input type="date" class="serach_form_input">
+              
+            </div>
+            <div class="serach_form_field">
+              
+              <label for="from_input" class="serach_form_label"> Passengers</label>
+
+              <select class="serach_form_input" >
+                <option>1 Passenger</option>
+                <option>2 Passengers</option>
+                <option>3 Passengers</option>
+                <option>4 Passengers</option>
+                <option>5 Passengers</option>
+                <option>6 Passengers</option>
+              </select>
+
+            </div>
+          </div>
+          <button class="flight_form_sub_btn">search flights</button>
+         </form>
+      </div>
+    </section>
+
+    <section class="deals">
+      <div class="deals_section">
+        <h2 class="deals_h2">Popular Destinations</h2>
+        <p class="deals_p">Explore trending routes with great deals</p>
+        <div class="deals-container" id="hotdealsContainer"></div>
+      </div>
+    </section>
      
   </main>
 

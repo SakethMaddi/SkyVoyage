@@ -15,7 +15,14 @@
 */
 
 body {
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 
@@ -51,7 +58,7 @@ body {
   color: black;
   font-weight: 700;
   font-size: 1.15rem;
-  font-family: "Inter", system-ui, sans-serif;
+  /* font-family: "Inter", system-ui, sans-serif; */
 }
 
 .head_menu{
@@ -67,7 +74,7 @@ body {
   color: black;
   font-weight: 600;
   opacity: 0.65;
-  font-family: "Inter", system-ui, sans-serif;
+  /* font-family: "Inter", system-ui, sans-serif; */
   font-size: 0.86rem;
 }
 
@@ -81,3 +88,107 @@ body {
     color: black;
     opacity: 1;
   }
+
+
+.hero_section{
+  background-image: linear-gradient(to right, #083aa4e7, #95bdee);
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  /* justify-content: center; */
+}
+
+.hero_section h1, .hero_section_p {
+  color: white;
+  font-weight: 700;
+  font-size: 2.2rem;
+  /* font-family: "Inter", system-ui, sans-serif; */
+}
+
+.hero_section_p {
+  font-weight: 400;
+  font-size: 1rem;
+  opacity: 0.76;
+  padding-bottom: 3%;
+}
+
+.Flight_search_form{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  background-color: white;
+  padding: 2%;
+  border-radius: 16px;
+}
+
+.search_form{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.serach_form_field{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.serach_form_label{
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.serach_form_input{
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.search_form_switch_btn{
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  height: 10px;
+}
+
+.lucide_arrow {
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 6px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.flight_form_sub_btn {
+  background-color:#2563eb;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+
+}
+
+.deals_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4%;
+}
+
+.deals_section h2{
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.deals_p{
+  color: black;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
