@@ -191,3 +191,70 @@ body {
   font-size: 0.85rem;
   opacity: 0.6;
 }
+
+.deals-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+  align-items: stretch;
+  /* flex-grow: 0 0 90%; */
+  padding-top: 5%;
+  width: 86%;
+}
+
+.deal-card {
+  flex: 0 0 31%;   /* 3 cards per row */
+  align-items: center;
+  justify-content: center;
+  /* padding: 20px; */
+  margin-bottom: 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.deal-card:hover {
+  transform: translateY(-4px); 
+}
+
+.card-top{
+  padding: 10px;
+  h2{
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  p{
+    font-size: 0.75rem;
+    opacity: 0.75;
+  }
+  span{
+    padding: 5px;
+    border-radius: 25px;
+    /* display: flex;
+    justify-content: flex-end; */
+    display: flex;
+    justify-self: end; 
+    /* border: 2px solid black; */
+    background-color: #dbe7f5;
+    font-size: 0.65rem;
+  }
+}
+
+.card-bottom {
+  background-color: white;
+  color: #1d4ed8;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 0.75rem;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  p{
+    color: black;
+    opacity: 0.5;
+  }
+}
