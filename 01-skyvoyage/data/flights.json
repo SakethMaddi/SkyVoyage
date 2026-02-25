@@ -11,7 +11,8 @@
     "stops": 0,
     "price": { "economy": 320, "business": 890 },
     "aircraft": "B737",
-    "seatsAvailable": { "economy": 52, "business": 8 }
+    "seatsAvailable": { "economy": 52, "business": 8 },
+    "tag": "Best Deal"
   },
   {
     "id": "FL-1002",
@@ -25,7 +26,8 @@
     "stops": 0,
     "price": { "economy": 345, "business": 950 },
     "aircraft": "A320",
-    "seatsAvailable": { "economy": 48, "business": 6 }
+    "seatsAvailable": { "economy": 48, "business": 6 },
+    "tag": "Popular"
   },
   {
     "id": "FL-1003",
@@ -39,7 +41,8 @@
     "stops": 0,
     "price": { "economy": 290, "business": 820 },
     "aircraft": "B777",
-    "seatsAvailable": { "economy": 65, "business": 10 }
+    "seatsAvailable": { "economy": 65, "business": 10 },
+    "tag": "Hot Deal"
   },
   {
     "id": "FL-1004",
@@ -53,7 +56,8 @@
     "stops": 0,
     "price": { "economy": 210, "business": 680 },
     "aircraft": "A320",
-    "seatsAvailable": { "economy": 70, "business": 12 }
+    "seatsAvailable": { "economy": 70, "business": 12 },
+    "tag": "Trending"
   },
   {
     "id": "FL-1005",
@@ -67,7 +71,8 @@
     "stops": 1,
     "price": { "economy": 180, "business": 540 },
     "aircraft": "B737",
-    "seatsAvailable": { "economy": 38, "business": 4 }
+    "seatsAvailable": { "economy": 38, "business": 4 },
+    "tag": "New Route"
   },
   {
     "id": "FL-1006",
@@ -81,7 +86,8 @@
     "stops": 0,
     "price": { "economy": 150, "business": 420 },
     "aircraft": "A320",
-    "seatsAvailable": { "economy": 60, "business": 10 }
+    "seatsAvailable": { "economy": 60, "business": 10 },
+    "tag":"Most Booked"
   },
   {
     "id": "FL-1007",
