@@ -94,7 +94,64 @@
 
       <div class="results-layout">
         <aside class="filters">
-        <!-- Filters later -->
+
+          <div class="filter-group">
+            <h4>Max Price</h4>
+            <input type="range" id="priceRange" min="0" max="2000" value="2000">
+            <p>Up to $<span id="priceValue">2000</span></p>
+          </div>
+
+          <div class="filter-group">
+            <h4>Stops</h4>
+
+            <label>
+              <input type="checkbox" class="stopFilter" value="0">
+              Direct
+            </label>
+
+            <label>
+              <input type="checkbox" class="stopFilter" value="1">
+              1 Stop
+            </label>
+          </div>
+
+          <div class="filter-group">
+            <h4>Airlines</h4>
+
+            <label>
+              <input type="checkbox" class="airlineFilter" value="Atlas Airways">
+              Atlas Airways
+            </label>
+
+            <label>
+              <input type="checkbox" class="airlineFilter" value="Polar Jet">
+              Polar Jet
+            </label>
+
+            <label>
+              <input type="checkbox" class="airlineFilter" value="Sunrise Airlines">
+              Sunrise Airlines
+            </label>
+
+            <label>
+              <input type="checkbox" class="airlineFilter" value="NorthStar Flights">
+              NorthStar Flights
+            </label>
+            <label>
+              <input type="checkbox" class="airlineFilter" value="Oceanic Wings">
+              Oceanic Wings
+            </label>
+
+            <label>
+              <input type="checkbox" class="airlineFilter" value="Skyline Air">
+              Skyline Air
+            </label>
+
+            <button id="applyFiltersBtn" class="apply-btn">
+              Apply Filters
+            </button>
+
+
         </aside>
 
       <div id="resultsContainer"></div>

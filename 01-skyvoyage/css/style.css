@@ -452,6 +452,41 @@ body {
 
 .select-btn:hover {
   background: #1f57c5;
+}
+
+
+
+
+.filters{
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+}
+
+.filter-group{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 100;
+}
+
+.apply-btn{
+  font-size: 0.75rem;
+  padding: 6px;
+  border-radius: 6px;
+  background: transparent;
+  border-color: #2563eb;
+  color: #1f57c5;
+  margin-top: 25%;
+  font-weight: 600;
+  width: 80%;
+}
+
+/* .results-layout{
+  height: 80vh;
+} */
+
 .footer_section{
   align-items: center;
   background-color: white;
