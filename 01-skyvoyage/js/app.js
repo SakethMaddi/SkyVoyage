@@ -12,10 +12,10 @@ let currentFlights = [];
 
 let activeFilters = {
   minPrice: 0,
-  maxPrice: 5000,
+  maxPrice: 0,
   stops: [],
   airlines: []
-};  
+};
 
 
 init();
@@ -83,15 +83,46 @@ async function loadFilteredFlights(fromCode, toCode) {
     flight.to.code === toCode
   );
 
-  flightCount.textContent = `${filteredFlights.length} flights found`;
+  currentFlights = filteredFlights;
 
-  renderResults(filteredFlights);
+  if (filteredFlights.length === 0) {
+  flightCount.textContent = "0 flights found";
+  renderResults([]);
+  return;
+}
 
-  // currentFlights = filteredFlights;
-  // applyFilters();
+  const prices = filteredFlights.map(f => f.price.economy);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
 
+  activeFilters = {
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+    stops: [],
+    airlines: []
+  };
+
+  const priceRange = document.getElementById("priceRange");
+  priceRange.min = minPrice;
+  priceRange.max = maxPrice;
+  priceRange.value = maxPrice;
+
+  document.querySelectorAll(".stopFilter, .airlineFilter")
+    .forEach(cb => cb.checked = false);
+
+    document.getElementById("priceValue").textContent = maxPrice;
+  
+
+  // flightCount.textContent = `${filteredFlights.length} flights found`;
+
+  // renderResults(filteredFlights);
+
+  selectAllFilters();
+  applyFilters();
 
 }
+
+
 function formatTime(dateString) {
   const date = new Date(dateString);
 
@@ -140,10 +171,46 @@ function renderResults(flights) {
 }
 
 
-// function applyFilters() {
-//   let filtered =
-// }
+function applyFilters() {
+  let filtered = currentFlights.filter(flight => {
+    const price = flight.price.economy
 
+    const priceMatch =
+      price >= activeFilters.minPrice &&
+      price <= activeFilters.maxPrice;
+
+    const stopsMatch =
+      activeFilters.stops.length === 0 ||
+      activeFilters.stops.includes(flight.stops);
+
+    const airlineMatch =
+      activeFilters.airlines.length === 0 ||
+      activeFilters.airlines.includes(flight.airline);
+    
+    return priceMatch && stopsMatch && airlineMatch;
+  });
+  flightCount.textContent = `${filtered.length} flights found`;
+  renderResults(filtered);
+}
+
+function selectAllFilters() {
+
+  // Select all stop checkboxes
+  document.querySelectorAll(".stopFilter")
+    .forEach(cb => cb.checked = true);
+
+  activeFilters.stops =
+    [...document.querySelectorAll(".stopFilter")]
+      .map(c => Number(c.value));
+
+  // Select all airline checkboxes
+  document.querySelectorAll(".airlineFilter")
+    .forEach(cb => cb.checked = true);
+
+  activeFilters.airlines =
+    [...document.querySelectorAll(".airlineFilter")]
+      .map(c => c.value);
+}
 
 
 document.querySelector(".Flight_search_form")
@@ -162,3 +229,58 @@ document.querySelector(".Flight_search_form")
     showResults(fromValue, toValue);
 });
 
+// document.querySelectorAll(".stopFilter")
+//   .forEach(cb => {
+
+//     cb.addEventListener("change", () => {
+
+//       activeFilters.stops =
+//         [...document.querySelectorAll(".stopFilter:checked")]
+//         .map(c => Number(c.value));
+
+//       applyFilters();
+//     });
+
+// });
+
+// document.querySelectorAll(".airlineFilter")
+//   .forEach(cb => {
+
+//     cb.addEventListener("change", () => {
+
+//       activeFilters.airlines =
+//         [...document.querySelectorAll(".airlineFilter:checked")]
+//         .map(c => c.value);
+
+//       applyFilters();
+//     });
+
+// });
+
+const priceRange = document.getElementById("priceRange");
+
+if (priceRange) {
+  priceRange.addEventListener("input", (e) => {
+    document.getElementById("priceValue").textContent = e.target.value;
+  });
+}
+
+const applyBtn = document.getElementById("applyFiltersBtn");
+
+if (applyBtn) {
+  applyBtn.addEventListener("click", () => {
+
+    activeFilters.stops =
+      [...document.querySelectorAll(".stopFilter:checked")]
+        .map(c => Number(c.value));
+
+    activeFilters.airlines =
+      [...document.querySelectorAll(".airlineFilter:checked")]
+        .map(c => c.value);
+
+    activeFilters.maxPrice =
+      Number(document.getElementById("priceRange").value);
+
+    applyFilters();
+  });
+}
