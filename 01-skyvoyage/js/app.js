@@ -40,3 +40,121 @@ function renderDeals(deals,allFlights) {
     
   });
 }
+
+
+//search
+
+import { getFlights } from "./api.js";
+let allFlights = [];
+
+(async function () {
+  allFlights = await getFlights();  
+})();
+
+function filterFlights(fromCode, toCode) {
+  return allFlights.filter(flight =>
+    flight.from.code === fromCode &&
+    flight.to.code === toCode
+  );
+}
+
+
+function formatTime(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function formatDuration(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hrs}h ${mins}m`;
+}
+
+function renderFlights(flights) {
+
+  const container = document.getElementById("resultsContainer");
+  container.innerHTML = "";
+
+  if (flights.length === 0) {
+    container.innerHTML = "<p>No flights found.</p>";
+    return;
+  }
+
+  flights.forEach(flight => {
+
+    const stopsText =
+      flight.stops === 0 ? "Direct" :
+      flight.stops === 1 ? "1 Stop" :
+      `${flight.stops} Stops`;
+
+    const card = document.createElement("div");
+    card.classList.add("flight-card");
+
+    card.innerHTML = `
+      <div class="flight-card-left">
+        <h3>${flight.airline}</h3>
+      </div>
+
+      <div class="flight-card-middle">
+        <div class="time-block">
+          <h2>${formatTime(flight.departureTime)}</h2>
+          <p>${flight.from.code}</p>
+        </div>
+
+        <div class="duration-block">
+          <p>${formatDuration(flight.duration)}</p>
+          <p>${stopsText}</p>
+        </div>
+
+        <div class="time-block">
+          <h2>${formatTime(flight.arrivalTime)}</h2>
+          <p>${flight.to.code}</p>
+        </div>
+      </div>
+
+      <div class="flight-card-right">
+        <h2>$${flight.price.economy}</h2>
+        <p>Economy</p>
+        <p>$${flight.price.business} Business</p>
+        <button class="select-btn">Select</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+
+
+document.getElementById("searchBtn").addEventListener("click", async () => {
+
+  const fromValue = document.getElementById("fromInput").value.trim();
+  const toValue = document.getElementById("toInput").value.trim();
+
+  const airports = await fetch("data/airports.json").then(res => res.json());
+
+  const fromAirport = airports.find(a =>
+    a.city.toLowerCase() === fromValue.toLowerCase() ||
+    a.code.toLowerCase() === fromValue.toLowerCase()
+  );
+
+  const toAirport = airports.find(a =>
+    a.city.toLowerCase() === toValue.toLowerCase() ||
+    a.code.toLowerCase() === toValue.toLowerCase()
+  );
+
+  if (!fromAirport || !toAirport) {
+    alert("Invalid airport");
+    return;
+  }
+
+  const filteredFlights = filterFlights(fromAirport.code, toAirport.code);
+
+  document.getElementById("popularSection").style.display = "none";
+  document.getElementById("resultsSection").style.display = "block";
+
+  renderFlights(filteredFlights);
+});
