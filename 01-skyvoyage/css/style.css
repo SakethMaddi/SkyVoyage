@@ -319,6 +319,12 @@ body {
 
 .results-header {
   margin-bottom: 30px;
+  .sort{
+    display: flex;
+    justify-self: end;
+    padding-right: 10%;
+
+  }
 }
 
 .results-layout {
@@ -369,11 +375,11 @@ body {
 .time-block {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 30%;
   padding-left: 50px;
-  padding-right: 50px;
+  /* padding-right: 50px; */
   h3 { 
-    font-size: 10px;
+    font-size: 20px;
     margin: 0;
   }
   span {
@@ -387,6 +393,38 @@ body {
   text-align: center;
   font-size: 14px;
   color: #555;
+  .line{
+    display: flex;
+    border: 1px solid #555;
+    width: 20vw;
+    position: relative;
+    .dot1{
+      position: absolute;
+      border: 5px solid #555;
+      border-radius: 50%;
+      align-self: flex-start;
+      top: -5px;
+      transform: translateX(-50%);
+    }
+    .dot3{
+      position: absolute;
+      border: 5px solid #555;
+      border-radius: 50%;
+      align-self: flex-start;
+      top: -5px;
+      left: 3.5%;
+      transform: translateX(-50%);
+    }
+    .dot2{
+      position: absolute;
+      border: 5px solid #555;
+      border-radius: 50%;
+      align-self: flex-start;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }
 
 /* Price section */
@@ -461,4 +499,5 @@ body {
     font-size: 0.75rem;
     opacity: 0.45;
   }
+}
 }
