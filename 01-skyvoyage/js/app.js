@@ -8,7 +8,20 @@ const routeTitle = document.getElementById("routeTitle");
 const flightCount = document.getElementById("flightCount");
 const resultsContainer = document.getElementById("resultsContainer");
 let currentFlights = [];
+
+let currentFlights = [];
+
+let activeFilters = {
+  minPrice: 0,
+  maxPrice: 5000,
+  stops: [],
+  airlines: []
+};  
+
+
 init();
+
+
 
 async function init() {
   try {
