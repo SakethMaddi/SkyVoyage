@@ -35,8 +35,13 @@ function renderDeals(deals,allFlights) {
         <p>${flightCount} flights daily</p>
       </div>
     `;
+    
     container.appendChild(card);
     card.style.backgroundColor= colors[i];
     
   });
 }
+
+card.addEventListener("click", () => {
+  showResults(deal.from.code, deal.to.code);
+});
