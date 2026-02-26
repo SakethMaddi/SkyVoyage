@@ -7,7 +7,7 @@ const resultsSection = document.getElementById("resultsSection");
 const routeTitle = document.getElementById("routeTitle");
 const flightCount = document.getElementById("flightCount");
 const resultsContainer = document.getElementById("resultsContainer");
-
+let currentFlights = [];
 init();
 
 async function init() {
@@ -66,14 +66,15 @@ function showResults(fromCode, toCode) {
 async function loadFilteredFlights(fromCode, toCode) {
   const flights = await getFlights();
 
-  const filteredFlights = flights.filter(flight =>
+  currentFlights = flights.filter(flight =>
     flight.from.code === fromCode &&
     flight.to.code === toCode
   );
 
-  flightCount.textContent = `${filteredFlights.length} flights found`;
 
-  renderResults(filteredFlights);
+  flightCount.textContent = `${currentFlights.length} flights found`;
+
+  renderResults(currentFlights);
 }
 function formatTime(dateString) {
   const date = new Date(dateString);
@@ -84,6 +85,17 @@ function formatTime(dateString) {
     hour12: true
   });
 }
+function formatDuration(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+
+  return `${hrs}h ${mins}m`;
+}
+function formatStops(stops) {
+  if (stops === 0) return "Direct";
+  if (stops === 1) return "1 Stop";
+  return `${stops} stops`;
+}
 function renderResults(flights) {
   resultsContainer.innerHTML = "";
 
@@ -93,15 +105,19 @@ function renderResults(flights) {
 
     card.innerHTML = `
       <div class="airline">${flight.airline}</div>
-
       <div class="time-block">
         <h3>${formatTime(flight.departureTime)}</h3>
         <span>${flight.from.code}</span>
       </div>
 
       <div class="duration">
-        ${flight.duration}
-        <div>${flight.stops} Stop</div>
+          <span> ${formatDuration(flight.duration)}</span>
+          <div class="line">
+            <span class="dot1"></span>
+            ${flight.stops > 0 ? `<span class="dot2"></span>` : ""}
+            <span class="dot3"></span>
+          </div>
+          <span>${formatStops(flight.stops)} </span>
       </div>
 
       <div class="time-block">
@@ -120,4 +136,25 @@ function renderResults(flights) {
 
     resultsContainer.appendChild(card);
   });
+}
+document.getElementById("sortSelect")
+  .addEventListener("change", handleSort);
+  function handleSort(e) {
+  const value = e.target.value;
+
+  let sorted = [...currentFlights];
+
+  if (value === "cheap") {
+    sorted.sort((a, b) => a.price.economy - b.price.economy);
+  }
+
+  if (value === "fast") {
+    sorted.sort((a, b) => a.duration - b.duration);
+  }
+
+  if (value === "best") {
+    sorted.sort((a, b) => b.duration - a.duration);
+  }
+
+  renderResults(sorted);
 }
