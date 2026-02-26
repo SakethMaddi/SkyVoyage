@@ -75,7 +75,15 @@ async function loadFilteredFlights(fromCode, toCode) {
 
   renderResults(filteredFlights);
 }
+function formatTime(dateString) {
+  const date = new Date(dateString);
 
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+}
 function renderResults(flights) {
   resultsContainer.innerHTML = "";
 
@@ -87,7 +95,7 @@ function renderResults(flights) {
       <div class="airline">${flight.airline}</div>
 
       <div class="time-block">
-        <h3>${flight.departureTime}</h3>
+        <h3>${formatTime(flight.departureTime)}</h3>
         <span>${flight.from.code}</span>
       </div>
 
@@ -97,7 +105,7 @@ function renderResults(flights) {
       </div>
 
       <div class="time-block">
-        <h3>${flight.arrivalTime}</h3>
+        <h3>${formatTime(flight.arrivalTime)}</h3>
         <span>${flight.to.code}</span>
       </div>
 
