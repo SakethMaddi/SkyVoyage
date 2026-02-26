@@ -8,7 +8,19 @@ const routeTitle = document.getElementById("routeTitle");
 const flightCount = document.getElementById("flightCount");
 const resultsContainer = document.getElementById("resultsContainer");
 
+let currentFlights = [];
+
+let activeFilters = {
+  minPrice: 0,
+  maxPrice: 5000,
+  stops: [],
+  airlines: []
+};  
+
+
 init();
+
+
 
 async function init() {
   try {
@@ -74,6 +86,11 @@ async function loadFilteredFlights(fromCode, toCode) {
   flightCount.textContent = `${filteredFlights.length} flights found`;
 
   renderResults(filteredFlights);
+
+  // currentFlights = filteredFlights;
+  // applyFilters();
+
+
 }
 function formatTime(dateString) {
   const date = new Date(dateString);
@@ -121,3 +138,27 @@ function renderResults(flights) {
     resultsContainer.appendChild(card);
   });
 }
+
+
+// function applyFilters() {
+//   let filtered =
+// }
+
+
+
+document.querySelector(".Flight_search_form")
+  .addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    const fromValue = document.getElementById("fromInput").value.trim().toUpperCase();
+    const toValue = document.getElementById("toInput").value.trim().toUpperCase();
+
+    if (!fromValue || !toValue) {
+      alert("Please enter both From and To airports");
+      return;
+    }
+
+    showResults(fromValue, toValue);
+});
+
