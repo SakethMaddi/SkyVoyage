@@ -35,6 +35,7 @@ function renderDeals(deals,allFlights) {
         <p>${flightCount} flights daily</p>
       </div>
     `;
+    
     container.appendChild(card);
     card.style.backgroundColor= colors[i];
     
@@ -157,4 +158,8 @@ document.getElementById("searchBtn").addEventListener("click", async () => {
   document.getElementById("resultsSection").style.display = "block";
 
   renderFlights(filteredFlights);
+
+card.addEventListener("click", () => {
+  showResults(deal.from.code, deal.to.code);
+})
 });
