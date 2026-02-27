@@ -28,10 +28,7 @@ async function init() {
   }
 }
 function countFlights(from, to, flights) {
-  return flights.filter(flight =>
-    flight.from.city === from &&
-    flight.to.city === to
-  ).length;
+  return flights.filter(flight => flight.from.city === from && flight.to.city === to).length;
 }
 
 function renderDeals(deals, allFlights) {
@@ -74,8 +71,7 @@ async function loadFilteredFlights(fromCode, toCode) {
   const flights = await getFlights();
 
   const filteredFlights = flights.filter(flight =>
-    flight.from.code === fromCode &&
-    flight.to.code === toCode
+    flight.from.code === fromCode && flight.to.code === toCode
   );
   currentFlights = filteredFlights;
   if (filteredFlights.length === 0) {

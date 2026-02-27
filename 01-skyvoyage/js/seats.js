@@ -95,77 +95,50 @@ function generateSeats(data) {
 }
 
 function selectSeat(seatEl, seatNumber, row) {
-
-  // document.querySelectorAll(".seat.selected")
-  //   .forEach(s => s.classList.remove("selected"));
-
-  // seatEl.classList.add("selected");
-
-  // selectedSeat = seatNumber;
-
-  // seatUpgrade = 0;
-
-  // if (currentSeatData.businessRows.includes(row))
-  //   seatUpgrade = 80;
-
-  // if (currentSeatData.exitRows.includes(row))
-  //   seatUpgrade = 40;
-
-  // updateSummary();
   if (selectedSeats.includes(seatNumber)) {
-
     selectedSeats = selectedSeats.filter(
       seat => seat !== seatNumber
     );
-
     seatEl.classList.remove("selected");
-
     updateSummary();
     return;
   }
-
-  // 🚫 Prevent selecting more seats than passengers
   if (selectedSeats.length >= passengerCount) {
     alert(`You can only select ${passengerCount} seats.`);
     return;
   }
-
-  // ✅ Select seat
   seatEl.classList.add("selected");
   selectedSeats.push(seatNumber);
-
   updateSummary();
 }
 
 function updateSummary() {
 
-  // const seatText =
-  //   document.getElementById("selectedSeatText");
-
-  // if (seatText)
-  //   seatText.textContent = `Seat: ${selectedSeat}`;
-  // document.getElementById("baseFare").textContent = `$${baseFare}`;
-  // document.getElementById("seatUpgrade")
-  //   .textContent = `$${seatUpgrade}`;
-
-  // document.getElementById("totalPrice")
-  //   .textContent =
-  //     `$${baseFare + seatUpgrade}`;
-  const seatText =
-    document.getElementById("selectedSeatText");
-
+  const seatText = document.getElementById("selectedSeatText");
+  const baseFareEl = document.getElementById("baseFare");
+  const seatUpgradeEl = document.getElementById("seatUpgrade");
+  const totalEl = document.getElementById("totalPrice");
   if (selectedSeats.length === 0) {
     seatText.textContent = "No seats selected";
   } else {
-    seatText.textContent =
-      `Seats: ${selectedSeats.join(", ")}`;
+    seatText.textContent = `Seats: ${selectedSeats.join(", ")}`;
   }
-
+  baseFareEl.textContent = `$${baseFare}`;
+  let totalUpgrade = 0;
+  selectedSeats.forEach(seat => {
+    const rowNumber = parseInt(seat); 
+    if (currentSeatData.businessRows.includes(rowNumber)) {
+      totalUpgrade += 80;
+    }
+    else if (currentSeatData.exitRows.includes(rowNumber)) {
+      totalUpgrade += 40;
+    }
+  });
+  seatUpgradeEl.textContent = `$${totalUpgrade}`;
   const total =
-    baseFare * passengerCount;
+    (baseFare * selectedSeats.length) + totalUpgrade;
 
-  document.getElementById("totalPrice")
-    .textContent = `$${total}`;
+  totalEl.textContent = `$${total}`;
 }
 function generatePassengerForms(count) {
 
