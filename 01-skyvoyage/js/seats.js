@@ -4,6 +4,8 @@ let selectedSeat = null;
 let baseFare = 0;
 let seatUpgrade = 0;
 let currentSeatData = null;
+let selectedSeats = [];
+let passengerCount = 1;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -27,8 +29,9 @@ async function init() {
     return;
   }
 
+  passengerCount = flight.passengers || 1;
+  generatePassengerForms(passengerCount); 
   generateSeats(currentSeatData);
-  generatePassengerForms(flight.passengers || 1);
 }
 
 function renderFlightSummary(flight) {
@@ -93,38 +96,76 @@ function generateSeats(data) {
 
 function selectSeat(seatEl, seatNumber, row) {
 
-  document.querySelectorAll(".seat.selected")
-    .forEach(s => s.classList.remove("selected"));
+  // document.querySelectorAll(".seat.selected")
+  //   .forEach(s => s.classList.remove("selected"));
 
+  // seatEl.classList.add("selected");
+
+  // selectedSeat = seatNumber;
+
+  // seatUpgrade = 0;
+
+  // if (currentSeatData.businessRows.includes(row))
+  //   seatUpgrade = 80;
+
+  // if (currentSeatData.exitRows.includes(row))
+  //   seatUpgrade = 40;
+
+  // updateSummary();
+  if (selectedSeats.includes(seatNumber)) {
+
+    selectedSeats = selectedSeats.filter(
+      seat => seat !== seatNumber
+    );
+
+    seatEl.classList.remove("selected");
+
+    updateSummary();
+    return;
+  }
+
+  // 🚫 Prevent selecting more seats than passengers
+  if (selectedSeats.length >= passengerCount) {
+    alert(`You can only select ${passengerCount} seats.`);
+    return;
+  }
+
+  // ✅ Select seat
   seatEl.classList.add("selected");
-
-  selectedSeat = seatNumber;
-
-  seatUpgrade = 0;
-
-  if (currentSeatData.businessRows.includes(row))
-    seatUpgrade = 80;
-
-  if (currentSeatData.exitRows.includes(row))
-    seatUpgrade = 40;
+  selectedSeats.push(seatNumber);
 
   updateSummary();
 }
 
 function updateSummary() {
 
+  // const seatText =
+  //   document.getElementById("selectedSeatText");
+
+  // if (seatText)
+  //   seatText.textContent = `Seat: ${selectedSeat}`;
+  // document.getElementById("baseFare").textContent = `$${baseFare}`;
+  // document.getElementById("seatUpgrade")
+  //   .textContent = `$${seatUpgrade}`;
+
+  // document.getElementById("totalPrice")
+  //   .textContent =
+  //     `$${baseFare + seatUpgrade}`;
   const seatText =
     document.getElementById("selectedSeatText");
 
-  if (seatText)
-    seatText.textContent = `Seat: ${selectedSeat}`;
-  document.getElementById("baseFare").textContent = `$${baseFare}`;
-  document.getElementById("seatUpgrade")
-    .textContent = `$${seatUpgrade}`;
+  if (selectedSeats.length === 0) {
+    seatText.textContent = "No seats selected";
+  } else {
+    seatText.textContent =
+      `Seats: ${selectedSeats.join(", ")}`;
+  }
+
+  const total =
+    baseFare * passengerCount;
 
   document.getElementById("totalPrice")
-    .textContent =
-      `$${baseFare + seatUpgrade}`;
+    .textContent = `$${total}`;
 }
 function generatePassengerForms(count) {
 
@@ -212,10 +253,13 @@ function handleContinue() {
     });
 
   });
-
+  if (selectedSeats.length !== passengerCount) {
+  alert(`Please select exactly ${passengerCount} seats.`);
+  return;
+  }
   const bookingData = {
     flight,
-    seat: selectedSeat,
+    seats: selectedSeats,
     passengers,
     totalPrice: baseFare + seatUpgrade
   };

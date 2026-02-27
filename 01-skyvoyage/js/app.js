@@ -77,15 +77,12 @@ async function loadFilteredFlights(fromCode, toCode) {
     flight.from.code === fromCode &&
     flight.to.code === toCode
   );
-
   currentFlights = filteredFlights;
-
   if (filteredFlights.length === 0) {
   flightCount.textContent = "0 flights found";
   renderResults([]);
   return;
 }
-
   const prices = filteredFlights.map(f => f.price.economy);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
@@ -168,21 +165,20 @@ function renderResults(flights) {
     
     resultsContainer.appendChild(card);
     card.querySelector(".select-btn").addEventListener("click", () => {
-    const selectedFlight = {
-      flightNumber: flight.flightNumber,
-      from: flight.from.code,
-      aircraft: flight.aircraft,
-      to: flight.to.code,
-      airline: flight.airline,
-      price: flight.price,
-      stops: flight.stops,
-      arrivalTime: `${formatTime(flight.arrivalTime)}`,
-      departureTime: `${formatTime(flight.departureTime)}`,
-      duration: `${formatDuration(flight.duration)}`,
-      passengers: flight.passengers || 1
-    };
-
-    console.log("Selected Flight:", selectedFlight);
+      const passengerCount =Number(document.getElementById("passengerCount").value);
+      const selectedFlight = {
+        flightNumber: flight.flightNumber,
+        from: flight.from.code,
+        aircraft: flight.aircraft,
+        to: flight.to.code,
+        airline: flight.airline,
+        price: flight.price,
+        stops: flight.stops,
+        arrivalTime: `${formatTime(flight.arrivalTime)}`,
+        departureTime: `${formatTime(flight.departureTime)}`,
+        duration: `${formatDuration(flight.duration)}`,
+        passengers: passengerCount
+      };
     localStorage.setItem(
       "selectedFlight",
       JSON.stringify(selectedFlight)
