@@ -16,12 +16,7 @@ let activeFilters = {
   stops: [],
   airlines: []
 };
-
-
 init();
-
-
-
 async function init() {
   try {
     const flights = await getFlights();
@@ -109,25 +104,28 @@ async function loadFilteredFlights(fromCode, toCode) {
 
   document.querySelectorAll(".stopFilter, .airlineFilter")
     .forEach(cb => cb.checked = false);
-
     document.getElementById("priceValue").textContent = maxPrice;
-  
-
-
   selectAllFilters();
   applyFilters();
-
 }
-
-
 function formatTime(dateString) {
   const date = new Date(dateString);
-
   return date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true
   });
+}
+function formatDuration(minutes) {
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+
+  return `${hrs}h ${mins}m`;
+}
+function formatStops(stops) {
+  if (stops === 0) return "Direct";
+  if (stops === 1) return "1 Stop";
+  return `${stops} stops`;
 }
 function renderResults(flights) {
   resultsContainer.innerHTML = "";
@@ -145,8 +143,13 @@ function renderResults(flights) {
       </div>
 
       <div class="duration">
-        ${flight.duration}
-        <div>${flight.stops} Stop</div>
+          <span> ${formatDuration(flight.duration)}</span>
+          <div class="line">
+            <span class="dot1"></span>
+            ${flight.stops > 0 ? `<span class="dot2"></span>` : ""}
+            <span class="dot3"></span>
+          </div>
+          <span>${formatStops(flight.stops)} </span>
       </div>
 
       <div class="time-block">
@@ -162,12 +165,34 @@ function renderResults(flights) {
         <button class="select-btn">Select</button>
       </div>
     `;
-
+    
     resultsContainer.appendChild(card);
+    card.querySelector(".select-btn").addEventListener("click", () => {
+    const selectedFlight = {
+      flightNumber: flight.flightNumber,
+      from: flight.from.code,
+      aircraft: flight.aircraft,
+      to: flight.to.code,
+      airline: flight.airline,
+      price: flight.price,
+      stops: flight.stops,
+      arrivalTime: `${formatTime(flight.arrivalTime)}`,
+      departureTime: `${formatTime(flight.departureTime)}`,
+      duration: `${formatDuration(flight.duration)}`,
+      passengers: flight.passengers || 1
+    };
+
+    console.log("Selected Flight:", selectedFlight);
+    localStorage.setItem(
+      "selectedFlight",
+      JSON.stringify(selectedFlight)
+    );
+
+    window.location.href = "seats.html";
+  });
+  console.log(flight)
   });
 }
-
-
 function applyFilters() {
   let filtered = currentFlights.filter(flight => {
     const price = flight.price.economy

@@ -16,7 +16,7 @@ export async function getPromos() {
   return await response.json();
 }
 
-export async function seatMaps() {
+export async function getSeatMaps() {
   const response = await fetch("data/seat-maps.json");
   return await response.json();
 }
