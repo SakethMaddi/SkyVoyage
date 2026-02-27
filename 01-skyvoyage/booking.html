@@ -51,27 +51,33 @@
           <h2>Promo Code</h2>
           <div class="promo_in_btn">
             <input type="text" class="promo_input" placeholder="ENTER PROMO CODE">
-            <button class="promo_btn">Apply</button>
+            <button type="button" class="promo_btn">Apply</button>
           </div>
+          <small class="error_msg" id="promoError"></small>
+          <small class="success_msg" id="promoSuccess"></small>
         </div>
         <div class="booking_paymentDetails">
           <h2>Payment details</h2>
           <div class="booking_payment">
             <label for="cardName">Cardholder Name</label>
             <input type="text" class="card_name" id="cardName" placeholder="NAME ON CARD">
+            <small class="error_msg" id="nameError"></small>
           </div>
           <div class="booking_payment">
             <label for="cardNum">Card Number</label>
             <input type="int" class="card_name" id="cardNum" placeholder="1234 5678 9101 1234">
+            <small class="error_msg" id="cardError"></small>
           </div>
           <div class="exp_cvv">
             <div class="booking_payment">
             <label for="card_exp">Expiry Date</label>
             <input type="int" class="card_name" id="card_exp" placeholder="MM/YY">
+            <small class="error_msg" id="expiryError"></small>
           </div>
           <div class="booking_payment">
             <label for="card_cvv">CVV</label>
             <input type="int" class="card_name" id="card_cvv" placeholder="123">
+            <small class="error_msg" id="cvvError"></small>
           </div>
           </div>
         </div>
@@ -80,6 +86,13 @@
       <div class="booking_content_right">
         <div>
           <h2>Booking Summary</h2>
+
+          <div class="booking_summary_box">
+            <p>Subtotal: $<span id="subtotal">500</span></p>
+            <p>Discount: $<span id="discount">0</span></p>
+            <hr>
+            <h3>Total: $<span id="total">500</span></h3>
+          </div>
         
         </div>
       </div>

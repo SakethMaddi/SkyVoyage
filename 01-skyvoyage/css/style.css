@@ -684,3 +684,34 @@ body {
     font-weight: 600;
   }
 }
+
+
+.error_msg {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.input-error {
+  border: 2px solid #e53935 !important;
+}
+
+.input-success {
+  border: 2px solid #2e7d32 !important;
+}
+
+.success_msg {
+  color: #2e7d32;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.input-success {
+  border: 2px solid #2e7d32 !important;
+}
+
+.input-error {
+  border: 2px solid #e53935 !important;
+}
