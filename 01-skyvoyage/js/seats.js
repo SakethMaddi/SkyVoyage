@@ -193,19 +193,15 @@ function generatePassengerForms(count) {
   }
 }
 
-document
-  .getElementById("bookButton")
-  .addEventListener("click", handleContinue);
-
+document.getElementById("bookButton").addEventListener("click", handleContinue);
 function handleContinue() {
-
   const flight =
     JSON.parse(localStorage.getItem("selectedFlight"));
 
-  if (!selectedSeat) {
-    alert("Please select a seat.");
-    return;
-  }
+if (selectedSeats.length !== passengerCount) {
+  alert(`Please select exactly ${passengerCount} seats.`);
+  return;
+}
 
   const passengerCards =
     document.querySelectorAll(".passenger-card");
