@@ -230,6 +230,16 @@ function selectAllFilters() {
       .map(c => c.value);
 }
 
+document.getElementById("switchbutton").addEventListener("click", (e) => {
+  e.preventDefault(); 
+  const fromInput = document.getElementById("fromInput");
+  const toInput = document.getElementById("toInput");
+  console.log(fromInput.value, toInput.value  );
+  const temp = fromInput.value;
+  fromInput.value = toInput.value;
+  toInput.value = temp;
+  console.log(fromInput.value, toInput.value  );
+});
 
 document.querySelector(".Flight_search_form")
   .addEventListener("submit", (e) => {
@@ -243,8 +253,7 @@ document.querySelector(".Flight_search_form")
       alert("Please enter both From and To airports");
       return;
     }
-
-    showResults(fromValue, toValue);
+    showResults(fromValue, toValue); 
 });
 
 
@@ -276,3 +285,4 @@ if (applyBtn) {
     applyFilters();
   });
 }
+
