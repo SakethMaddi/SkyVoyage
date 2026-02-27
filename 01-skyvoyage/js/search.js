@@ -258,3 +258,11 @@ if (applyBtn) {
     applyFilters();
   });
 }
+// import { getFlights } from "./api.js";
+
+// let flights = [];
+
+// (async function () {
+//   flights = await getFlights();
+//   console.log(flights);
+// })();
