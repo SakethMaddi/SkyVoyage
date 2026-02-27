@@ -1,13 +1,18 @@
+const page = document.body.dataset.page;
 
-import { getFlights } from "./api.js";
+switch (page) {
+  case "search":
+    import("./search.js");
+    break;
 
-const dealsContainer = document.getElementById("hotdealsContainer");
-const dealsSection = document.getElementById("dealsSection");
-const resultsSection = document.getElementById("resultsSection");
-const routeTitle = document.getElementById("routeTitle");
-const flightCount = document.getElementById("flightCount");
-const resultsContainer = document.getElementById("resultsContainer");
+  case "booking":
+    import("./booking.js");
+    break;
 
+  case "confirmation":
+    import("./confirmation.js");
+    break;
+}
 let currentFlights = [];
 
 let activeFilters = {

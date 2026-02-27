@@ -62,6 +62,7 @@ body {
   background-color: white;
   position: sticky;
   top: 0;
+  z-index: 1000;
   justify-content: center;
   align-items: center;
   height: 60px;
@@ -486,11 +487,13 @@ body {
 .footer_section{
   align-items: center;
   background-color: white;
-  height: 10vh;
+  /* height: 10vh; */
   display: flex;
-  align-items: center;
+  padding: 26px 0;
+  text-align: center;
   justify-content: center;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 60px;
   p{
     font-size: 0.75rem;
     opacity: 0.45;
@@ -531,6 +534,216 @@ body {
   margin: 20px 0;
 }
 
+.bookings_main {
+  width: 60%;
+  margin: 0 auto;  
+  padding: 40px 0;
+}
+
+.bookings_head{
+  padding: 5% 0;
+}
+
+.bookings_head h1{
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.booking_flow{
+  display: flex;
+  gap: 10px;
+}
+
+.booking_step{
+  background-color: rgb(217, 237, 217);
+  padding: 5px 15px;
+  border-radius: 16px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 200;
+}
+
+.booking_step_pym{
+  background-color: #c6cff8;
+  padding: 5px 15px;
+  border-radius: 16px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.booking_step_cnfm{
+  background-color: rgb(239, 239, 239);
+  padding: 5px 15px;
+  border-radius: 16px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.booking_step_n {
+  width: 24px;
+  height: 24px;
+  background-color: rgb(14, 163, 14);
+  border-radius: 50%;
+  color: white;
+  display: flex;  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.booking_step_pn{
+  width: 24px;
+  height: 24px;
+  background-color: rgb(60, 60, 216);
+  border-radius: 50%;
+  color: white;
+  display: flex;  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.Booking_content{
+  display: flex;
+  gap: 5%;
+  
+}
+
+.booking_content_left{
+  display: flex;
+  flex-direction: column;
+  gap: 8%;
+}
+
+.booking_promoCode{
+  background-color: white;
+  box-shadow: 4px 6px 18px rgba(0,0,0,0.06);
+  width: 460px;
+  /* height: 60%; */
+  padding: 4% 5%;
+  border-radius: 10px;
+}
+
+.promo_in_btn{
+  display: flex;
+  gap: 6px;
+  padding-top: 5%;
+}
+
+.booking_promoCode h2{
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.promo_input{
+  width: 70%;
+  padding: 16px;
+  border-radius: 6px;
+  border-color: #87838385;
+}
+
+.promo_btn {
+  padding: 16px;
+  border-radius: 6px;
+  border-color: #2b6ef5;
+  background: transparent;
+  color: #2b6ef5;
+  width: 20%;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.booking_paymentDetails{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+  box-shadow: 4px 6px 18px rgba(0,0,0,0.06);
+  /* width: 460px; */
+  padding: 8% 5%;
+  border-radius: 10px;
+
+  h2{
+    font-size: 1rem;
+  font-weight: 600;
+  }
+}
+
+.booking_payment{
+  display: flex;
+  flex-direction: column;
+
+  label{
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0.76;
+  }
+}
+
+.exp_cvv{
+  display: flex;
+  gap: 5%;
+}
+
+.card_name{
+  padding: 16px;
+  border-radius: 6px;
+  border-color: #87838385;
+}
+
+.booking_content_right{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+  box-shadow: 4px 6px 18px rgba(0,0,0,0.06);
+  padding: 3% 3%;
+  border-radius: 10px;
+  
+  h2{
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+
+.error_msg {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
+.input-error {
+  border: 2px solid #e53935 !important;
+}
+
+.input-success {
+  border: 2px solid #2e7d32 !important;
+}
+
+.success_msg {
+  color: #2e7d32;
+  font-size: 13px;
+  margin-top: 6px;
+  display: none;
+}
+
+.input-success {
+  border: 2px solid #2e7d32 !important;
+}
+
+.input-error {
+  border: 2px solid #e53935 !important;
 .box {
   width: 15px;
   height: 15px;
