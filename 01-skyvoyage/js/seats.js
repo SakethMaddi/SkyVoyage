@@ -188,6 +188,9 @@ function handleContinue() {
   const flight =
     JSON.parse(localStorage.getItem("selectedFlight"));
 
+  const selectedDate =
+  localStorage.getItem("selectedDate");
+
   if (!selectedSeat) {
     alert("Please select a seat.");
     return;
@@ -217,7 +220,10 @@ function handleContinue() {
     flight,
     seat: selectedSeat,
     passengers,
-    totalPrice: baseFare + seatUpgrade
+    baseFare,
+    seatUpgrade,
+    totalPrice: baseFare + seatUpgrade,
+    selectedDate  
   };
 
   localStorage.setItem(

@@ -844,3 +844,234 @@ input {
   font-weight: 200;
   cursor: pointer;
 }
+
+
+.route-section{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
+.route-codes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 6%;
+}
+
+.route_from {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 6px;
+}
+
+.airport-code {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.city-names {
+  font-size: 0.75rem;
+  font-size: 400;
+  opacity: 0.8;
+}
+
+.flight-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.8;
+  gap: 8px;
+  padding: 6%;
+}
+
+.seat_fair{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.booking_line{
+  font-weight: 300;
+  opacity: 0.65;
+}
+
+.booked_seat{
+  padding: 8px 0; 
+  font-size: 0.8rem;
+  opacity: 0.75;
+  font-weight: 500;
+}
+
+.booking_fairs {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  font-weight: 300;
+  opacity: 0.8;
+
+}
+
+.base_fair{
+  padding-top: 10px;
+}
+
+.discount_fair{
+  padding-bottom: 10px;
+}
+
+.booking_fairs_final{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.booking_right_div{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.booking_pay_btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: not-allowed;
+  background-color: #cbd5e1;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.booking_pay_btn.active {
+  background-color: #2563eb;
+  cursor: pointer;
+}
+
+.booking_pay_btn.active:hover {
+  background-color: #1d4ed8;
+}
+
+
+.modal_overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.modal_overlay.active {
+  display: flex;
+}
+
+
+.modal_box {
+  background: white;
+  width: 420px;
+  border-radius: 12px;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal_close {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.modal_body {
+  margin-top: 10px;
+}
+
+.modal_note {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+.modal_actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal_back_btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #2563eb;
+  background: white;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.modal_confirm_btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.success_alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px 18px;
+  border-radius: 8px;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+}
+
+.success_alert.active {
+  display: flex;
+}
+
+.close_alert {
+  cursor: pointer;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
