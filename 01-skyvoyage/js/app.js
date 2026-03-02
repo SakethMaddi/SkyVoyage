@@ -28,10 +28,7 @@ async function init() {
   }
 }
 function countFlights(from, to, flights) {
-  return flights.filter(flight =>
-    flight.from.city === from &&
-    flight.to.city === to
-  ).length;
+  return flights.filter(flight => flight.from.city === from && flight.to.city === to).length;
 }
 
 function renderDeals(deals, allFlights) {
@@ -91,18 +88,14 @@ async function loadFilteredFlights(fromCode, toCode) {
   const flights = await getFlights();
 
   const filteredFlights = flights.filter(flight =>
-    flight.from.code === fromCode &&
-    flight.to.code === toCode
+    flight.from.code === fromCode && flight.to.code === toCode
   );
-
   currentFlights = filteredFlights;
-
   if (filteredFlights.length === 0) {
   flightCount.textContent = "0 flights found";
   renderResults([]);
   return;
 }
-
   const prices = filteredFlights.map(f => f.price.economy);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
@@ -209,6 +202,20 @@ function renderResults(flights) {
     };
 
     console.log("Selected Flight:", selectedFlight);
+      const passengerCount =Number(document.getElementById("passengerCount").value);
+      const selectedFlight = {
+        flightNumber: flight.flightNumber,
+        from: flight.from.code,
+        aircraft: flight.aircraft,
+        to: flight.to.code,
+        airline: flight.airline,
+        price: flight.price,
+        stops: flight.stops,
+        arrivalTime: `${formatTime(flight.arrivalTime)}`,
+        departureTime: `${formatTime(flight.departureTime)}`,
+        duration: `${formatDuration(flight.duration)}`,
+        passengers: passengerCount
+      };
     localStorage.setItem(
       "selectedFlight",
       JSON.stringify(selectedFlight)
@@ -260,6 +267,16 @@ function selectAllFilters() {
       .map(c => c.value);
 }
 
+document.getElementById("switchbutton").addEventListener("click", (e) => {
+  e.preventDefault(); 
+  const fromInput = document.getElementById("fromInput");
+  const toInput = document.getElementById("toInput");
+  console.log(fromInput.value, toInput.value  );
+  const temp = fromInput.value;
+  fromInput.value = toInput.value;
+  toInput.value = temp;
+  console.log(fromInput.value, toInput.value  );
+});
 
 document.querySelector(".Flight_search_form")
   .addEventListener("submit", (e) => {
@@ -294,6 +311,7 @@ document.querySelector(".Flight_search_form")
     localStorage.setItem("selectedDate", departureDate);
 
     showResults(fromValue, toValue);
+    showResults(fromValue, toValue); 
 });
 
 document.addEventListener("DOMContentLoaded", () => {

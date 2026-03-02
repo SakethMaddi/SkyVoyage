@@ -4,6 +4,8 @@ let selectedSeat = null;
 let baseFare = 0;
 let seatUpgrade = 0;
 let currentSeatData = null;
+let selectedSeats = [];
+let passengerCount = 1;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -27,8 +29,9 @@ async function init() {
     return;
   }
 
+  passengerCount = flight.passengers || 1;
+  generatePassengerForms(passengerCount); 
   generateSeats(currentSeatData);
-  generatePassengerForms(flight.passengers || 1);
 }
 
 function renderFlightSummary(flight) {
@@ -92,39 +95,50 @@ function generateSeats(data) {
 }
 
 function selectSeat(seatEl, seatNumber, row) {
-
-  document.querySelectorAll(".seat.selected")
-    .forEach(s => s.classList.remove("selected"));
-
+  if (selectedSeats.includes(seatNumber)) {
+    selectedSeats = selectedSeats.filter(
+      seat => seat !== seatNumber
+    );
+    seatEl.classList.remove("selected");
+    updateSummary();
+    return;
+  }
+  if (selectedSeats.length >= passengerCount) {
+    alert(`You can only select ${passengerCount} seats.`);
+    return;
+  }
   seatEl.classList.add("selected");
-
-  selectedSeat = seatNumber;
-
-  seatUpgrade = 0;
-
-  if (currentSeatData.businessRows.includes(row))
-    seatUpgrade = 80;
-
-  if (currentSeatData.exitRows.includes(row))
-    seatUpgrade = 40;
-
+  selectedSeats.push(seatNumber);
   updateSummary();
 }
 
 function updateSummary() {
 
-  const seatText =
-    document.getElementById("selectedSeatText");
+  const seatText = document.getElementById("selectedSeatText");
+  const baseFareEl = document.getElementById("baseFare");
+  const seatUpgradeEl = document.getElementById("seatUpgrade");
+  const totalEl = document.getElementById("totalPrice");
+  if (selectedSeats.length === 0) {
+    seatText.textContent = "No seats selected";
+  } else {
+    seatText.textContent = `Seats: ${selectedSeats.join(", ")}`;
+  }
+  baseFareEl.textContent = `$${baseFare}`;
+  let totalUpgrade = 0;
+  selectedSeats.forEach(seat => {
+    const rowNumber = parseInt(seat); 
+    if (currentSeatData.businessRows.includes(rowNumber)) {
+      totalUpgrade += 80;
+    }
+    else if (currentSeatData.exitRows.includes(rowNumber)) {
+      totalUpgrade += 40;
+    }
+  });
+  seatUpgradeEl.textContent = `$${totalUpgrade}`;
+  const total =
+    (baseFare * selectedSeats.length) + totalUpgrade;
 
-  if (seatText)
-    seatText.textContent = `Seat: ${selectedSeat}`;
-  document.getElementById("baseFare").textContent = `$${baseFare}`;
-  document.getElementById("seatUpgrade")
-    .textContent = `$${seatUpgrade}`;
-
-  document.getElementById("totalPrice")
-    .textContent =
-      `$${baseFare + seatUpgrade}`;
+  totalEl.textContent = `$${total}`;
 }
 function generatePassengerForms(count) {
 
@@ -179,12 +193,8 @@ function generatePassengerForms(count) {
   }
 }
 
-document
-  .getElementById("bookButton")
-  .addEventListener("click", handleContinue);
-
+document.getElementById("bookButton").addEventListener("click", handleContinue);
 function handleContinue() {
-
   const flight =
     JSON.parse(localStorage.getItem("selectedFlight"));
 
@@ -195,6 +205,10 @@ function handleContinue() {
     alert("Please select a seat.");
     return;
   }
+if (selectedSeats.length !== passengerCount) {
+  alert(`Please select exactly ${passengerCount} seats.`);
+  return;
+}
 
   const passengerCards =
     document.querySelectorAll(".passenger-card");
@@ -215,10 +229,13 @@ function handleContinue() {
     });
 
   });
-
+  if (selectedSeats.length !== passengerCount) {
+  alert(`Please select exactly ${passengerCount} seats.`);
+  return;
+  }
   const bookingData = {
     flight,
-    seat: selectedSeat,
+    seats: selectedSeats,
     passengers,
     baseFare,
     seatUpgrade,
