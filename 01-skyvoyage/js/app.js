@@ -57,6 +57,23 @@ function renderDeals(deals, allFlights) {
   });
 }
 function showResults(fromCode, toCode) {
+
+  const dateInput = document.getElementById("departureDate");
+  let departureDate = dateInput?.value;
+
+  // If empty, default to today
+  if (!departureDate) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+
+    departureDate = `${year}-${month}-${day}`;
+  }
+
+  // ✅ Always store date (important for popular deals)
+  localStorage.setItem("selectedDate", departureDate);
+
   routeTitle.textContent = `${fromCode} → ${toCode}`;
 
   dealsSection.classList.add("hidden");
@@ -161,6 +178,30 @@ function renderResults(flights) {
     
     resultsContainer.appendChild(card);
     card.querySelector(".select-btn").addEventListener("click", () => {
+    const selectedFlight = {
+      flightNumber: flight.flightNumber,
+
+      from: {
+        code: flight.from.code,
+        city: flight.from.city
+      },
+
+      to: {
+        code: flight.to.code,
+        city: flight.to.city
+      },
+
+      aircraft: flight.aircraft,
+      airline: flight.airline,
+      price: flight.price,
+      stops: flight.stops,
+      arrivalTime: formatTime(flight.arrivalTime),
+      departureTime: formatTime(flight.departureTime),
+      duration: formatDuration(flight.duration),
+      passengers: flight.passengers || 1
+    };
+
+    console.log("Selected Flight:", selectedFlight);
       const passengerCount =Number(document.getElementById("passengerCount").value);
       const selectedFlight = {
         flightNumber: flight.flightNumber,
@@ -244,12 +285,44 @@ document.querySelector(".Flight_search_form")
 
     const fromValue = document.getElementById("fromInput").value.trim().toUpperCase();
     const toValue = document.getElementById("toInput").value.trim().toUpperCase();
+    const dateInput = document.getElementById("departureDate");
+
+    let departureDate = dateInput.value;
 
     if (!fromValue || !toValue) {
       alert("Please enter both From and To airports");
       return;
     }
+
+    // ✅ ALWAYS override with today if empty OR invalid
+    if (!departureDate || departureDate === "") {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+
+      departureDate = `${year}-${month}-${day}`;
+
+      // also update input visually
+      dateInput.value = departureDate;
+    }
+
+    // ✅ IMPORTANT: always overwrite localStorage
+    localStorage.setItem("selectedDate", departureDate);
+
+    showResults(fromValue, toValue);
     showResults(fromValue, toValue); 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dateInput = document.getElementById("departureDate");
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  dateInput.value = `${year}-${month}-${day}`;
 });
 
 
@@ -281,4 +354,5 @@ if (applyBtn) {
     applyFilters();
   });
 }
+
 

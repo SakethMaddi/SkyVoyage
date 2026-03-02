@@ -83,18 +83,34 @@
         </div>
       </div>
 
-      <div class="booking_content_right">
+      <div class="booking_right_div">
+        <div class="booking_content_right">
         <div>
           <h2>Booking Summary</h2>
 
           <div class="booking_summary_box">
-            <p>Subtotal: $<span id="subtotal">500</span></p>
-            <p>Discount: $<span id="discount">0</span></p>
+            <div class="booking_fairs">
+              <p>Subtotal</p>
+              <p>$<span id="subtotal"></span></p>
+            </div>
+            <div class="booking_fairs">
+              <p class="discount_fair">Discount</p>
+              <p>$<span id="discount"></span></p>
+            </div>
+            
             <hr>
-            <h3>Total: $<span id="total">500</span></h3>
+            <div class="booking_fairs_final">
+              <h3>Total</h3>
+              <h3>$<span id="total"></span></h3>
+            </div>
+            
           </div>
         
         </div>
+      </div>
+        <button class="booking_pay_btn" id="payBtn" disabled>
+          Confirm & Pay
+        </button>
       </div>
       
     </div>
@@ -104,6 +120,34 @@
     <p>&copy; 2026 SkyVoyage. All rights reserved.</p>
   </footer>
 
-  <script type="module" src="js/bookings.js"></script>
+ 
+<div class="modal_overlay" id="confirmModal">
+  <div class="modal_box">
+    <div class="modal_header">
+      <h3>Confirm Booking</h3>
+      <span class="modal_close" id="closeModal">&times;</span>
+    </div>
+
+    <div class="modal_body">
+      <p id="modalRouteText"></p>
+      <p>Total charge: <strong>$<span id="modalTotal"></span></strong></p>
+      
+    </div>
+
+    <div class="modal_actions">
+      <button class="modal_back_btn" id="goBackBtn">Go Back</button>
+      <button class="modal_confirm_btn" id="finalConfirmBtn">
+        Confirm & Pay
+      </button>
+    </div>
+  </div>
+</div>
+<div class="success_alert" id="successAlert">
+  <span>✔ Booking confirmed!</span>
+  <span class="close_alert" id="closeAlert">&times;</span>
+</div>
+
+
+  <script type="module" src="js/booking.js"></script>
 </body>
 </html>

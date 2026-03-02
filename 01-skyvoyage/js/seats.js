@@ -198,6 +198,13 @@ function handleContinue() {
   const flight =
     JSON.parse(localStorage.getItem("selectedFlight"));
 
+  const selectedDate =
+  localStorage.getItem("selectedDate");
+
+  if (!selectedSeat) {
+    alert("Please select a seat.");
+    return;
+  }
 if (selectedSeats.length !== passengerCount) {
   alert(`Please select exactly ${passengerCount} seats.`);
   return;
@@ -230,7 +237,10 @@ if (selectedSeats.length !== passengerCount) {
     flight,
     seats: selectedSeats,
     passengers,
-    totalPrice: baseFare + seatUpgrade
+    baseFare,
+    seatUpgrade,
+    totalPrice: baseFare + seatUpgrade,
+    selectedDate  
   };
 
   localStorage.setItem(
