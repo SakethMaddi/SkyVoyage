@@ -178,6 +178,7 @@ function renderResults(flights) {
     
     resultsContainer.appendChild(card);
     card.querySelector(".select-btn").addEventListener("click", () => {
+    const passengerCount =Number(document.getElementById("passengerCount").value);
     const selectedFlight = {
       flightNumber: flight.flightNumber,
 
@@ -198,24 +199,23 @@ function renderResults(flights) {
       arrivalTime: formatTime(flight.arrivalTime),
       departureTime: formatTime(flight.departureTime),
       duration: formatDuration(flight.duration),
-      passengers: flight.passengers || 1
+      passengers: passengerCount
     };
 
     console.log("Selected Flight:", selectedFlight);
-      const passengerCount =Number(document.getElementById("passengerCount").value);
-      const selectedFlight = {
-        flightNumber: flight.flightNumber,
-        from: flight.from.code,
-        aircraft: flight.aircraft,
-        to: flight.to.code,
-        airline: flight.airline,
-        price: flight.price,
-        stops: flight.stops,
-        arrivalTime: `${formatTime(flight.arrivalTime)}`,
-        departureTime: `${formatTime(flight.departureTime)}`,
-        duration: `${formatDuration(flight.duration)}`,
-        passengers: passengerCount
-      };
+      // const selectedFlight = {
+      //   flightNumber: flight.flightNumber,
+      //   from: flight.from.code,
+      //   aircraft: flight.aircraft,
+      //   to: flight.to.code,
+      //   airline: flight.airline,
+      //   price: flight.price,
+      //   stops: flight.stops,
+      //   arrivalTime: `${formatTime(flight.arrivalTime)}`,
+      //   departureTime: `${formatTime(flight.departureTime)}`,
+      //   duration: `${formatDuration(flight.duration)}`,
+      //   passengers: passengerCount
+      // };
     localStorage.setItem(
       "selectedFlight",
       JSON.stringify(selectedFlight)

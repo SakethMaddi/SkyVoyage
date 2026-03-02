@@ -843,6 +843,7 @@ input {
   border-radius: 8px;
   font-weight: 200;
   cursor: pointer;
+  width: 100%;
 }
 
 

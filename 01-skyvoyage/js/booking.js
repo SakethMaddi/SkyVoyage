@@ -16,8 +16,6 @@ if (promoBtn) {
   promoBtn.addEventListener("click", async () => {
 
     const enteredCode = promoInput.value.trim().toUpperCase();
-
-    // Reset UI
     promoInput.classList.remove("input-error", "input-success");
     promoError.style.display = "none";
     promoSuccess.style.display = "none";
@@ -222,7 +220,7 @@ function loadBookingSummary() {
 
   const {
     flight,
-    seat,
+    seats,
     passengers,
     baseFare = 0,
     seatUpgrade = 0,
@@ -238,7 +236,7 @@ function loadBookingSummary() {
 
   renderFullSummary(
     flight,
-    seat,
+    seats,
     passengers,
     baseFare,
     seatUpgrade,
@@ -246,7 +244,7 @@ function loadBookingSummary() {
   );
 }
 
-function renderFullSummary(flight, seat, passengers, baseFare, seatUpgrade, selectedDate) {
+function renderFullSummary(flight, seats, passengers, baseFare, seatUpgrade, selectedDate) {
 
   const summaryBox = document.querySelector(".booking_summary_box");
 
@@ -313,7 +311,7 @@ function renderFullSummary(flight, seat, passengers, baseFare, seatUpgrade, sele
 
       <p class="booked_seat">SEATS</p>
       <div class="seat_fair">
-        <p>${seat} (${seatType})<p>
+        <p>${seats} (${seatType})<p>
         <p>$${Number(seatUpgrade).toFixed(2)}</p>
       </div>
 
@@ -322,7 +320,7 @@ function renderFullSummary(flight, seat, passengers, baseFare, seatUpgrade, sele
       <p class="booked_seat"><strong>PASSANGERS</strong>
       <div class="seat_fair">
         <p>${passengerNames}</p>
-        <p>${seat}</p>
+        <p>${seats}</p>
       </div>
 
       <hr class="booking_line">

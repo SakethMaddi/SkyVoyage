@@ -40,7 +40,7 @@ function renderFlightSummary(flight) {
   if (!summary) return;
 
   summary.innerHTML = `
-    ${flight.from} → ${flight.to}
+    ${flight.from.code} → ${flight.to.code}
     • ${flight.airline}
     • ${flight.duration}
     • ${flight.departureTime} - ${flight.arrivalTime}
@@ -133,6 +133,7 @@ function updateSummary() {
       totalUpgrade += 40;
     }
   });
+  seatUpgrade = totalUpgrade;
   seatUpgradeEl.textContent = `$${totalUpgrade}`;
   const total =
     (baseFare * selectedSeats.length) + totalUpgrade;
@@ -157,33 +158,33 @@ function generatePassengerForms(count) {
       <div class="form-row">
         <div class="firstname">
           <p >First Name</p>
-          <input type="text" placeholder="e.g. John" >
+          <input type="text" placeholder="e.g. John" required>
         </div>
         <div class="lastname">
         <p>Last Name</p>
-        <input type="text" placeholder="e.g. doe">
+        <input type="text" placeholder="e.g. doe" required >
         </div>
       </div>
 
       <div class="form-row">
         <div class="email">
           <p>Email</p>
-          <input type="email" placeholder="e.g. 8sKdF@example.com">
+          <input type="email" placeholder="e.g. 8sKdF@example.com" required>
         </div>
         <div class="phone">
           <p>Phone</p>
-          <input type="number" placeholder="e.g. +1234567890">
+          <input type="number" placeholder="e.g. +1234567890" required>
         </div>
       </div>
 
       <div class="form-row">
         <div class="passport">
           <p>Passport Number</p>
-          <input type="text" placeholder="Passport Number">
+          <input type="text" placeholder="Passport Number" required>
         </div>
         <div class="dob">
           <p>Date of Birth</p>
-          <input type="date">
+          <input type="date" required>
         </div>
       </div>
     `;
@@ -192,25 +193,25 @@ function generatePassengerForms(count) {
   }
 }
 
-document.getElementById("bookButton").addEventListener("click", handleContinue);
+document.getElementById("bookingForm")
+  .addEventListener("submit", function (e) {
+
+    e.preventDefault(); // stop page reload
+
+    if (selectedSeats.length !== passengerCount) {
+      alert(`Please select exactly ${passengerCount} seats.`);
+      return;
+    }
+
+    handleContinue();
+});
 function handleContinue() {
   const flight =
     JSON.parse(localStorage.getItem("selectedFlight"));
 
-  const selectedDate =
-  localStorage.getItem("selectedDate");
+  const selectedDate = localStorage.getItem("selectedDate");
 
-  if (!selectedSeat) {
-    alert("Please select a seat.");
-    return;
-  }
-if (selectedSeats.length !== passengerCount) {
-  alert(`Please select exactly ${passengerCount} seats.`);
-  return;
-}
-
-  const passengerCards =
-    document.querySelectorAll(".passenger-card");
+  const passengerCards = document.querySelectorAll(".passenger-card");
 
   const passengers = [];
 
@@ -238,7 +239,7 @@ if (selectedSeats.length !== passengerCount) {
     passengers,
     baseFare,
     seatUpgrade,
-    totalPrice: baseFare + seatUpgrade,
+    totalPrice: baseFare * selectedSeats.length + seatUpgrade,
     selectedDate  
   };
 
