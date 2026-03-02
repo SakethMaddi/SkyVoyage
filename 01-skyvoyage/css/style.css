@@ -843,7 +843,7 @@ input {
   border-radius: 8px;
   font-weight: 200;
   cursor: pointer;
-  width: 100%;
+  width: 100;
 }
 
 
@@ -1074,5 +1074,48 @@ input {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+.legend{
+  .box_Exit{
+    span{
+      border: 1px solid #16a34a;
+      background-color: #16a34a;
+      padding-left: 9px;
+      padding-right: 9px;
+      height: 2px;
+      border-radius: 30%;
+    }
+  }
+  .box_business{
+    span{
+      border: 1px solid #a855f7;
+      background-color: #a855f7;
+      padding-left: 9px;
+      padding-right: 9px;
+      height: 2px;
+      border-radius: 30%;
+      /* font-size: 1rem; */
+    }
+  }
+  .box_occupied{
+    span{
+      border: 1px solid #cbd5e1;
+      background-color: #cbd5e1;
+      padding-left: 9px;
+      padding-right: 9px;
+      height: 2px;
+      border-radius: 30%;
+    }
+  }
+  .box_selected{
+    span{
+      border: 1px solid #2563eb;
+      background-color: #2563eb;
+      padding-left: 9px;
+      padding-right: 9px;
+      height: 2px;
+      border-radius: 30%;  
+    }
   }
 }
