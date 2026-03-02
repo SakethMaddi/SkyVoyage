@@ -310,19 +310,23 @@ document.querySelector(".Flight_search_form")
     // ✅ IMPORTANT: always overwrite localStorage
     localStorage.setItem("selectedDate", departureDate);
 
-    showResults(fromValue, toValue);
-    showResults(fromValue, toValue); 
+    showResults(fromValue, toValue);1
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.getElementById("departureDate");
 
   const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
+  today.setHours(0, 0, 0, 0);
 
-  dateInput.value = `${year}-${month}-${day}`;
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+
+  const formatted = `${yyyy}-${mm}-${dd}`;
+
+  dateInput.min = formatted;
+  dateInput.value = formatted; 
 });
 
 
