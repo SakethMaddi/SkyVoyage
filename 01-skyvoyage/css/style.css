@@ -1119,3 +1119,138 @@ input {
     }
   }
 }
+
+.login-container {
+  background: white;
+  padding: 40px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  margin: 90px auto;
+}
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2b10b2;
+  color: white;
+  /* border: none; */
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  background: #1f0d8a;
+}
+
+.error-msg {
+  color: red;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.nav_Bar{
+  display: flex;
+  justify-content: space-between;
+  width: 74%;
+  margin: 0 auto;
+  margin-top: 20px;
+  align-items: center;
+  #logoutBtn{
+    background-color: transparent;
+    border: none;
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;  
+  }
+}
+
+.signup-container {
+  background: white;
+  padding: 40px;
+  width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  text-align: center;
+  margin: 60px auto;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2b10b2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup-btn:hover {
+  background: #1f0d8a;
+}
+
+.error-msg {
+  color: red;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+}

@@ -1,3 +1,7 @@
+if (!localStorage.getItem("isLoggedIn")) {
+  window.location.href = "login.html";
+}
+
 import { getSeatMaps } from "./api.js";
 
 let selectedSeat = null;

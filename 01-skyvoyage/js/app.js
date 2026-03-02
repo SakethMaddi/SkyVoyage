@@ -1,3 +1,6 @@
+if (!localStorage.getItem("isLoggedIn")) {
+  window.location.href = "login.html";
+}
 
 import { getFlights } from "./api.js";
 

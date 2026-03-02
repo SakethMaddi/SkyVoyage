@@ -1,3 +1,6 @@
+if (!localStorage.getItem("isLoggedIn")) {
+  window.location.href = "login.html";
+}
 
 const promoInput = document.querySelector(".promo_input");
 const promoBtn = document.querySelector(".promo_btn");
