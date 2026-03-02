@@ -50,8 +50,7 @@ function renderFlightSummary(flight) {
 
 function generateSeats(data) {
 
-  const container =
-    document.getElementById("seatContainer");
+  const container = document.getElementById("seatContainer");
 
   container.innerHTML = "";
 
