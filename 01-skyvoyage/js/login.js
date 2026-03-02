@@ -1,31 +1,34 @@
+// login.js
 
-document.getElementById("loginForm").addEventListener("submit", (e) => {
-    e.preventDefault(); 
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const error = document.getElementById("loginError");
-    error.textContent = "";
-    const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+  if (!loginForm) return;
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById("loginEmail");
+    const passwordInput = document.getElementById("loginPassword");
+    const errorEl = document.getElementById("loginError");
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    errorEl.textContent = "";
+    const storedUser =
+      JSON.parse(localStorage.getItem("registeredUser"));
     if (!storedUser) {
-    error.textContent = "No account found. Please sign up.";
-    return;
+      errorEl.textContent = "No account found. Please sign up.";
+      return;
     }
-    if (email === storedUser.email && password === storedUser.password) {
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem( "currentUser", JSON.stringify(storedUser) );
-        alert("Login successful! Redirecting to search page...");
-        window.location.href = "index.html";
+    const emailMatch =
+      storedUser.email.toLowerCase() === email.toLowerCase();
+    const passwordMatch = storedUser.password === password;
+    if (emailMatch && passwordMatch) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(storedUser)
+      );
+      window.location.href = "index.html";
     } else {
-    error.textContent = "Invalid email or password.";
+      errorEl.textContent = "Invalid email or password.";
     }
-});
-
-document.getElementById("logoutBtn")
-  ?.addEventListener("click", () => {
-
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("currentUser");
-
-  window.location.href = "login.html";
+  });
 });

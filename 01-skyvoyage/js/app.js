@@ -341,3 +341,16 @@ if (applyBtn) {
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  if (user && user.name) {
+    const welcome = document.getElementById("welcomeUser");
+    welcome.textContent = `Hi, ${user.name.toUpperCase()}`;
+  }
+  const logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn?.addEventListener("click", () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+  });
+});
