@@ -60,8 +60,6 @@ function showResults(fromCode, toCode) {
 
   const dateInput = document.getElementById("departureDate");
   let departureDate = dateInput?.value;
-
-  // If empty, default to today
   if (!departureDate) {
     const today = new Date();
     const year = today.getFullYear();
@@ -71,7 +69,6 @@ function showResults(fromCode, toCode) {
     departureDate = `${year}-${month}-${day}`;
   }
 
-  // ✅ Always store date (important for popular deals)
   localStorage.setItem("selectedDate", departureDate);
 
   routeTitle.textContent = `${fromCode} → ${toCode}`;
@@ -203,19 +200,6 @@ function renderResults(flights) {
     };
 
     console.log("Selected Flight:", selectedFlight);
-      // const selectedFlight = {
-      //   flightNumber: flight.flightNumber,
-      //   from: flight.from.code,
-      //   aircraft: flight.aircraft,
-      //   to: flight.to.code,
-      //   airline: flight.airline,
-      //   price: flight.price,
-      //   stops: flight.stops,
-      //   arrivalTime: `${formatTime(flight.arrivalTime)}`,
-      //   departureTime: `${formatTime(flight.departureTime)}`,
-      //   duration: `${formatDuration(flight.duration)}`,
-      //   passengers: passengerCount
-      // };
     localStorage.setItem(
       "selectedFlight",
       JSON.stringify(selectedFlight)
@@ -293,8 +277,6 @@ document.querySelector(".Flight_search_form")
       alert("Please enter both From and To airports");
       return;
     }
-
-    // ✅ ALWAYS override with today if empty OR invalid
     if (!departureDate || departureDate === "") {
       const today = new Date();
       const year = today.getFullYear();
@@ -302,12 +284,8 @@ document.querySelector(".Flight_search_form")
       const day = String(today.getDate()).padStart(2, "0");
 
       departureDate = `${year}-${month}-${day}`;
-
-      // also update input visually
       dateInput.value = departureDate;
     }
-
-    // ✅ IMPORTANT: always overwrite localStorage
     localStorage.setItem("selectedDate", departureDate);
 
     showResults(fromValue, toValue);1
