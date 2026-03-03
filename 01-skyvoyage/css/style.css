@@ -1344,40 +1344,10 @@ input {
           }
       }
     }
-
-    .container{
-      display: flex;
-      /* flex-direction: column; */
-      .flight-summary{
-        width: 100%;
-      }
-      .seat-layout{
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        width: 100%;
-        .right-panel{
-          width: 100%;
-          padding-left: 5px;
-            .summary-card{
-              width: 100%;
-            }
-            .passenger-card{
-              width: 100%;
-            }
-            .form-row{
-              flex-direction: column;
-              gap: 20px;
-            }
-            input{
-              width: 100%;
-            }
-            #bookButton{
-              width: 100%;
-            }
-          }
-        }
-    }
+  }
+  .seat-layout{
+    display: flex;
+    flex-direction: column;
   }
   .bookings_main{
     width: 100%;
@@ -1395,7 +1365,6 @@ input {
     flex-direction: column;
     gap: 20px;
     padding: 10px;
-    /* width: 90%; */
   }
   .bookings_head h1{
     font-size: 1.5rem;
@@ -1403,5 +1372,81 @@ input {
   }
   .promo_btn{
     font-size: 0.5rem;
+  }
+}
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .deals-container{
+    padding-top: 10%;
+    width: 90%;
+    gap: 20px;
+  }
+
+  .deals_section{
+    padding-top: 6%;
+    h2{
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    p{
+      font-size: 0.9rem;
+    }
+  }
+
+  .deal-card {
+    flex: 0 0 48%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+
+  .tag {
+    align-self: flex-end;
+  }
+
+  .results-layout {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .apply-btn{
+    margin: 6% 0;
+    width: 100%;
+  }
+
+  .continue-btn{
+    width: 100%;
+  }
+
+  .Booking_content{
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .booking_content_left{
+    gap: 20px;
+  }
+
+  .booking_content_right{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .booking_promoCode{
+    width: 100%;
+  }
+
+  .bookings_head{
+    padding-bottom: 10%;
+  }
+
+  .legend {
+    font-size: 0.79rem;
   }
 }

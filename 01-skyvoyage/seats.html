@@ -21,8 +21,11 @@
     </nav>
 </header>
 
-  <main class="container">
-    <div class="flight-summary" id="flightSummary"></div>
+
+
+<main class="container">
+  <div class="flight-summary" id="flightSummary"></div>
+  <div class="seat_selection">
     <div class="seat-layout">
       <div class="seat-section">
         <h2>Select Your Seats</h2>
@@ -35,36 +38,37 @@
           <div class="box_Exit"><span class="box_exit"></span> Exit Row</div>
         </div>
         <div id="seatContainer" class="seat-container"></div>
-        <div class="right-panel">
-      <div class="summary-card">
-        <h3>Your Selection</h3>
-        <p id="selectedSeatText">No seats selected</p>
-        <hr>
-        <div class="price-row">
-          <span>Base fare</span>
-          <span id="baseFare">$0.00</span>
-        </div>
-        <div class="price-row">
-          <span>Seat upgrades</span>
-          <span id="seatUpgrade">$0.00</span>
-        </div>
-        <hr>
-        <div class="price-row total">
-          <span>Total per passenger</span>
-          <span id="totalPrice">$0.00</span>
-        </div>
       </div>
-      <form id="bookingForm">
-        <div id="passengerFormsContainer"></div>
-        <button id="bookButton" type="submit" class="continue-btn">Continue to Booking</button>
-      </form>
+      <div class="right-panel">
+        <div class="summary-card">
+          <h3>Your Selection</h3>
+          <p id="selectedSeatText">No seats selected</p>
+          <hr>
+          <div class="price-row">
+            <span>Base fare</span>
+            <span id="baseFare">$0.00</span>
+          </div>
+          <div class="price-row">
+            <span>Seat upgrades</span>
+            <span id="seatUpgrade">$0.00</span>
+          </div>
+          <hr>
+          <div class="price-row total">
+            <span>Total per passenger</span>
+            <span id="totalPrice">$0.00</span>
+          </div>
+        </div>
+        <form id="bookingForm">
+          <div id="passengerFormsContainer"></div>
+          <button id="bookButton" type="submit" class="continue-btn">Continue to Booking</button>
+        </form>
+      </div>
     </div>
-      </div>
-
   </div>
-  </main>
+</main>
 
-  <footer>
+
+  <footer class="footer_section">
     <p>&copy; 2026 SkyVoyage. All rights reserved.</p>
   </footer>
 
