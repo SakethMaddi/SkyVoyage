@@ -365,7 +365,7 @@ payBtn.addEventListener("click", () => {
   modalRouteText.textContent =
     `You are about to book a flight from ${flight.from.code} to ${flight.to.code}.`;
 
-  modalTotal.textContent = totalEl.textContent;
+  modalTotal.textContent = total.textContent;
 
   confirmModal.classList.add("active");
 });
