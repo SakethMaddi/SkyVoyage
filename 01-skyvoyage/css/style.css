@@ -1379,4 +1379,29 @@ input {
         }
     }
   }
+  .bookings_main{
+    width: 100%;
+  }
+  .Booking_content{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+  }
+  .booking_promoCode{
+    width: 100%;
+  }
+  .booking_flow{
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    /* width: 90%; */
+  }
+  .bookings_head h1{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .promo_btn{
+    font-size: 0.5rem;
+  }
 }
