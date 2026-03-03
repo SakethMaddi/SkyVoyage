@@ -7,9 +7,9 @@ const promoBtn = document.querySelector(".promo_btn");
 const promoError = document.getElementById("promoError");
 const promoSuccess = document.getElementById("promoSuccess");
 
-const subtotalEl = document.getElementById("subtotal");
-const discountEl = document.getElementById("discount");
-const totalEl = document.getElementById("total");
+const subtotal = document.getElementById("subtotal");
+const discount = document.getElementById("discount");
+const total = document.getElementById("total");
 
 let originalTotal = 0;
 document.addEventListener("DOMContentLoaded", loadBookingSummary);
@@ -51,8 +51,8 @@ if (promoBtn) {
 
       const finalTotal = subtotal - discount;
 
-      discountEl.textContent = discount.toFixed(2);
-      totalEl.textContent = finalTotal.toFixed(2);
+      discount.textContent = discount.toFixed(2);
+      total.textContent = finalTotal.toFixed(2);
 
       showPromoSuccess(discount);
 
@@ -233,9 +233,9 @@ function loadBookingSummary() {
 
   originalTotal = totalPrice;
 
-  subtotalEl.textContent = originalTotal.toFixed(2);
-  totalEl.textContent = originalTotal.toFixed(2);
-  discountEl.textContent = "0.00";
+  subtotal.textContent = originalTotal.toFixed(2);
+  total.textContent = originalTotal.toFixed(2);
+  discount.textContent = "0.00";
 
   renderFullSummary(
     flight,
