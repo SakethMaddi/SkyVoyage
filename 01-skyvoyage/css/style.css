@@ -1253,6 +1253,192 @@ input {
   margin-top: 20px;
   font-size: 14px;
 }
+/* confirmationpage */
+.header {
+  background: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nav_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #2b10b2;
+}
+
+.head_menu .h_menu {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* .head_menu .active {
+  color: #2b10b2;
+  text-decoration: none;
+} */
+ 
+.head_menu a{
+  text-decoration: none;
+}
+
+
+.cnf-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+
+.cnf-confirmationcard {
+  background: white;
+  width: 520px;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+
+.cnfm-tickmark {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  border: 3px solid #10b981;
+  color: #10b981;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.cnfm-firstline {
+  font-size: 2rem;
+  margin: 10px 0 5px;
+}
+
+.cnfm-secondline {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+
+.cnfm-booking-reference {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  background: #f9fafb;
+}
+
+.cnfm-booking-reference p {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.cnfm-booking-reference h2 {
+  margin: 10px 0 0;
+  color: #2b10b2;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+.cnfm-location-details {
+  font-size: 1.5rem;
+  margin: 15px 0 5px;
+}
+
+.cnfm-flight-details {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+
+.cnfm-passenger-details {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.passenger-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+
+.cnfm-payment-details {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 20px;
+  padding-top: 15px;
+}
+
+.cnfm-payment-details h2 {
+  margin: 5px 0;
+  color: #111827;
+}
+
+.cnfm-end-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.cnfm-View-My-bookings {
+  background: #2563eb;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.cnfm-View-My-bookings:hover {
+  background: #1e40af;
+}
+
+.cnfm-Search-more-Flights {
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.cnfm-Search-more-Flights:hover {
+  background: #eff6ff;
+}
+
+.cnfm-footer_section {
+  text-align: center;
+  padding: 15px;
+  background: white;
+  font-size: 1rem;
+  color: #6b7280;
 
 
 
