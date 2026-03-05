@@ -1440,10 +1440,30 @@ input {
   font-size: 1rem;
   color: #6b7280;
 }
+.booking-history-container{
+  width: 70%;
+  margin: 30px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.booking-item{
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.booking-details{
+  display:none;
+  margin-top:15px;
+}
 
-
-
-
+.booking-details.active{
+  display:block;
+  /* align-items: flex-start; */
+}
 
 @media (max-width: 768px) {
    .nav_Bar{
@@ -1567,31 +1587,31 @@ input {
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
 
-  .deals-container {
+  .deals-container{
     padding-top: 10%;
     width: 90%;
     gap: 20px;
   }
 
-  .deals_section {
+  .deals_section{
     padding-top: 6%;
-  }
-
-  .deals_section h2 {
-    font-size: 1.35rem;
-    font-weight: 600;
-  }
-
-  .deals_section p {
-    font-size: 0.9rem;
+    h2{
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    p{
+      font-size: 0.9rem;
+    }
   }
 
   .deal-card {
     flex: 0 0 48%;
+    justify-content: space-between;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
   }
+
 
   .tag {
     align-self: flex-end;
@@ -1601,35 +1621,35 @@ input {
     display: flex;
     flex-direction: column;
   }
-
-  .apply-btn {
+  
+  .apply-btn{
     margin: 6% 0;
     width: 100%;
   }
 
-  .continue-btn {
+  .continue-btn{
     width: 100%;
   }
 
-  .Booking_content {
+  .Booking_content{
     flex-direction: column;
     gap: 20px;
   }
 
-  .booking_content_left {
+  .booking_content_left{
     gap: 20px;
   }
 
-  .booking_content_right {
+  .booking_content_right{
     padding-bottom: 10px;
     margin-bottom: 10px;
   }
 
-  .booking_promoCode {
+  .booking_promoCode{
     width: 100%;
   }
 
-  .bookings_head {
+  .bookings_head{
     padding-bottom: 10%;
   }
 

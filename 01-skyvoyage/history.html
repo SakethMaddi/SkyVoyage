@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="history">
-  
-
   <header class="header">
     <nav class="nav_bar">
       <a href="./index.html" class="header_logo">
@@ -16,22 +14,27 @@
         <span>SkyVoyage</span>
       </a>
       <div class="head_menu">
-        <a href="./index.html" class="h_menu">Search</a>
-        <a href="./history.html" class="h_menu active">My Bookings</a>
+        <a href="./index.html" class="h_menu active">Search</a>
+        <a href="./history.html" class="h_menu">My Bookings</a>
+        <div class="nav-user">
+        <span id="welcomeUser"></span>
+        <button id="logoutBtn">Logout</button>
+      </div>
       </div>
     </nav>
   </header>
-
   <main>
-    <!-- Booking history list -->
-    <!-- Empty state when no bookings -->
-    <!-- Clear history button -->
+    <section class="history_section">
+      <h2>My Bookings</h2>
+      <div id="bookingHistoryContainer" class="booking-history-container">
+      </div>
+    </section>
   </main>
 
   <footer class="footer_section">
     <p>&copy; 2026 SkyVoyage. All rights reserved.</p>
   </footer>
 
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/history.js"></script>
 </body>
 </html>
