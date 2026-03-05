@@ -7,9 +7,9 @@ const promoBtn = document.querySelector(".promo_btn");
 const promoError = document.getElementById("promoError");
 const promoSuccess = document.getElementById("promoSuccess");
 
-const subtotal = document.getElementById("subtotal");
-const discount = document.getElementById("discount");
-const total = document.getElementById("total");
+const subtotalEl = document.getElementById("subtotal");
+const discountEl = document.getElementById("discount");
+const totalEl = document.getElementById("total");
 
 let originalTotal = 0;
 document.addEventListener("DOMContentLoaded", loadBookingSummary);
@@ -29,7 +29,7 @@ if (promoBtn) {
     }
 
     try {
-      const response = await fetch("data/promos.json");
+      const response = await fetch("./data/promos.json");
       const promos = await response.json();
 
       const promo = promos.find(p =>
@@ -41,20 +41,20 @@ if (promoBtn) {
         return;
       }
 
-      let subtotal = parseFloat(subtotalEl.textContent);
+      let subtotalValue = parseFloat(subtotalEl.textContent);
 
-      let discount = promo.type === "percentage"
-        ? (subtotal * promo.value) / 100
+      let discountValue = promo.type === "percentage"
+        ? (subtotalValue * promo.value) / 100
         : promo.value;
 
-      if (discount > subtotal) discount = subtotal;
+      if (discountValue > subtotalValue) discountValue = subtotalValue;
 
-      const finalTotal = subtotal - discount;
+      const finalTotal = subtotalValue - discountValue;
 
-      discount.textContent = discount.toFixed(2);
-      total.textContent = finalTotal.toFixed(2);
+      discountEl.textContent = discountValue.toFixed(2);
+      totalEl.textContent = finalTotal.toFixed(2);
 
-      showPromoSuccess(discount);
+      showPromoSuccess(discountValue);
 
     } catch (err) {
       showPromoError("Error loading promo data");
