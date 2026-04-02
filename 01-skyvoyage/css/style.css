@@ -1580,6 +1580,11 @@ input {
   .promo_btn{
     font-size: 0.5rem;
   }
+  .booking-item{
+    flex-direction: column;
+    gap: 10px;
+  }
+
 }
 
 

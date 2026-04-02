@@ -73,7 +73,7 @@ function generateSeats(data) {
       const seatNumber = row + col;
       const seat = document.createElement("div");
       seat.classList.add("seat");
-      // seat.textContent = col;
+ 
       if (data.occupied.includes(seatNumber)) {
         seat.classList.add("occupied");
       } else {
