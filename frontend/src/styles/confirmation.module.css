@@ -1,0 +1,13 @@
+.container {
+  width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.success {
+  color: #10b981;
+  font-size: 2rem;
+}

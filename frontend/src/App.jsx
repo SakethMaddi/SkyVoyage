@@ -1,16 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { FlightProvider } from "./context/flightContext";
 import Search from "./pages/Search";
 import Seats from "./pages/Seats";
-import Bookings from "./pages/Bookings";
+import Checkout from "./pages/Checkout";
+import Confirmation from "./pages/Confirmation";
+import MyBookings from "./pages/MyBookings";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Search />} />
-        <Route path="/seats" element={<Seats />} />
-        <Route path="/bookings" element={<Bookings />}  />
-      </Routes>
-    </BrowserRouter>
+    <FlightProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/seats" element={<Seats />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/bookings" element={<MyBookings />} />
+        </Routes>
+      </BrowserRouter>
+    </FlightProvider>
   );
 }

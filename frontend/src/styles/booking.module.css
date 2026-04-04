@@ -1,0 +1,16 @@
+.page {
+  width: 60%;
+  margin: auto;
+  padding: 40px 0;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.left, .right {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}

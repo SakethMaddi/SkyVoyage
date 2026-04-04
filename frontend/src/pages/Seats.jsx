@@ -1,202 +1,361 @@
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import "../styles/seats.css";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { FlightContext } from "../context/flightContext";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { getSeatMaps } from "../services/api";
 
 export default function Seats() {
-  const location = useLocation();
-  const flight = location.state?.flight;
-  const passengers = location.state?.passengers;
   const navigate = useNavigate();
+  const { flight, passengers, selectedSeats, setSelectedSeats } =
+    useContext(FlightContext);
 
+  const [seatMaps, setSeatMaps] = useState(null);
+  const [currentSeatData, setCurrentSeatData] = useState(null);
+  const [baseFare, setBaseFare] = useState(0);
+  const [seatUpgrade, setSeatUpgrade] = useState(0);
+  const [passengerForms, setPassengerForms] = useState([]);
 
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const raw = localStorage.getItem("selectedFlight");
+      const parsed = raw ? JSON.parse(raw) : null;
+      if (!parsed && !flight) {
+        navigate("/");
+        return;
+      }
+      const f = flight || parsed;
+      if (!f?.aircraft) {
+        navigate("/");
+        return;
+      }
+      setBaseFare(f.price?.economy || 0);
+      try {
+        const maps = await getSeatMaps();
+        if (cancelled) return;
+        setSeatMaps(maps);
+        const data = maps[f.aircraft];
+        setCurrentSeatData(data || null);
+      } catch (e) {
+        console.error(e);
+        setCurrentSeatData(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [flight, navigate]);
 
-  const rows = 26;
-  const cols = ["A", "B", "C", "D", "E", "F"];
+  const pax = flight?.passengers ?? passengers ?? 1;
 
-  const [passengerDetails, setPassengerDetails] = useState(
-    Array.from({ length: passengers }, () => ({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      passport: "",
-      dob: "",
-    }))
-  );
+  useEffect(() => {
+    setPassengerForms(
+      Array.from({ length: pax }, () => ({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        passport: "",
+        dob: "",
+      }))
+    );
+  }, [pax]);
 
-  const handleContinue = () => {
-    navigate("/bookings", {
-      state: {
-        flight,
-        passengers,
-        selectedSeats,
-        passengerDetails,
-      },
+  const updatePassenger = (index, field, value) => {
+    setPassengerForms((prev) => {
+      const next = [...prev];
+      next[index] = { ...next[index], [field]: value };
+      return next;
     });
   };
 
-  const handleInputChange = (index, field, value) => {
-    const updated = [...passengerDetails];
-    updated[index][field] = value;
-    setPassengerDetails(updated);
+  const selectSeat = useCallback(
+    (seatNumber) => {
+      if (!currentSeatData) return;
+      setSelectedSeats((prev) => {
+        if (prev.includes(seatNumber)) {
+          return prev.filter((s) => s !== seatNumber);
+        }
+        if (prev.length >= pax) {
+          window.alert(`You can only select ${pax} seats.`);
+          return prev;
+        }
+        return [...prev, seatNumber];
+      });
+    },
+    [currentSeatData, pax, setSelectedSeats]
+  );
+
+  useEffect(() => {
+    if (!currentSeatData) return;
+    let totalUpgrade = 0;
+    selectedSeats.forEach((seat) => {
+      const rowNumber = parseInt(seat, 10);
+      if (currentSeatData.businessRows?.includes(rowNumber))
+        totalUpgrade += 80;
+      else if (currentSeatData.exitRows?.includes(rowNumber))
+        totalUpgrade += 40;
+    });
+    setSeatUpgrade(totalUpgrade);
+  }, [selectedSeats, currentSeatData]);
+
+  const totalPerPassengerDisplay =
+    selectedSeats.length === 0
+      ? 0
+      : baseFare * selectedSeats.length + seatUpgrade;
+
+  const handleContinue = (e) => {
+    e.preventDefault();
+    const f = flight || JSON.parse(localStorage.getItem("selectedFlight") || "{}");
+    if (!f?.from) {
+      navigate("/");
+      return;
+    }
+    if (selectedSeats.length !== pax) {
+      window.alert(`Please select exactly ${pax} seats.`);
+      return;
+    }
+    const passengersPayload = passengerForms.map((p) => ({
+      firstName: p.firstName,
+      lastName: p.lastName,
+      email: p.email,
+      phone: p.phone,
+      passport: p.passport,
+      dob: p.dob,
+    }));
+    const selectedDate = localStorage.getItem("selectedDate") || "";
+    const bookingData = {
+      flight: f,
+      seats: selectedSeats,
+      passengers: passengersPayload,
+      baseFare,
+      seatUpgrade,
+      totalPrice: baseFare * selectedSeats.length + seatUpgrade,
+      selectedDate,
+    };
+    localStorage.setItem("bookingData", JSON.stringify(bookingData));
+    navigate("/checkout");
   };
 
-  const handleSeatClick = (seat) => {
-    if (selectedSeats.includes(seat)) {
-      setSelectedSeats(selectedSeats.filter((s) => s !== seat));
-    } else {
-      if (selectedSeats.length < passengers) {
-        setSelectedSeats([...selectedSeats, seat]);
-      }
-    }
-  };
+  const f = flight || JSON.parse(localStorage.getItem("selectedFlight") || "null");
 
   return (
-    <div className="seat-page">
-
-      {/* TOP BAR */}
-      <div className="flight-header">
-        <h2>{flight?.from?.code} → {flight?.to?.code}</h2>
-        <p>{flight?.airline} • {flight?.departureTime} - {flight?.arrivalTime}</p>
-      </div>
-
-      <div className="seat-layout">
-
-        {/* LEFT SIDE */}
-        <div className="seat-section">
-
-          <h3>Select Your Seats</h3>
-
-          {/* LEGEND */}
-          <div className="legend">
-            <span className="box available"></span> Available
-            <span className="box selected"></span> Selected
-            <span className="box occupied"></span> Occupied
-            <span className="box exit"></span> Exit Row
-          </div>
-
-          {/* GRID */}
-          <div className="seat-grid">
-
-            {/* COLUMN LABELS */}
-            <div className="seat-row labels">
-              {cols.map((c) => (
-                <span key={c}>{c}</span>
-              ))}
-            </div>
-
-            {Array.from({ length: rows }).map((_, rowIndex) => (
-              <div key={rowIndex} className="seat-row">
-
-                <span className="row-number">{rowIndex + 1}</span>
-
-                {cols.map((col, i) => {
-                  const seat = `${rowIndex + 1}${col}`;
-                  const isSelected = selectedSeats.includes(seat);
-
-                  const isExit = rowIndex === 9 || rowIndex === 10;
-
-                  return (
-                    <div
-                      key={seat}
-                      className={`seat 
-                        ${isSelected ? "selected" : ""}
-                        ${isExit ? "exit" : ""}
-                      `}
-                      onClick={() => handleSeatClick(seat)}
-                    >
-                      {seat}
-                    </div>
-                  );
-                })}
+    <>
+      <Header />
+      <main className="container">
+        <div className="flight-summary" id="flightSummary">
+          {f
+            ? `${f.from.code} → ${f.to.code} • ${f.airline} • ${f.duration} • ${f.departureTime} - ${f.arrivalTime} • ${f.stops} Stop`
+            : ""}
+        </div>
+        <div className="seat_selection">
+          <div className="seat-layout">
+            <div className="seat-section">
+              <h2>Select Your Seats</h2>
+              <p>Select 1 seat for your flight</p>
+              <div className="legend">
+                <div>
+                  <span className="box_available" /> Available
+                </div>
+                <div>
+                  <span className="box_selected" /> Selected
+                </div>
+                <div>
+                  <span className="box_occupied" /> Occupied
+                </div>
+                <div>
+                  <span className="box_business" /> Business
+                </div>
+                <div>
+                  <span className="box_exit" /> Exit Row
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* RIGHT SIDE */}
-        <div className="summary">
-
-          <h3>Your Selection</h3>
-
-          <p>{selectedSeats.length ? selectedSeats.join(", ") : "No seats selected"}</p>
-
-          <div className="price-box">
-            <p>Base fare: ${flight?.price?.economy || 0}</p>
-            <p>Total: ${selectedSeats.length * (flight?.price?.economy || 0)}</p>
-          </div>
-
-          <button 
-          disabled={selectedSeats.length !== passengers} 
-          onClick={handleContinue}
-          >
-            Continue to Booking
-          </button>
-
-          {/* PASSENGER FORM */}
-          <div className="passenger-form">
-          {passengerDetails.map((p, index) => (
-            <div key={index} className="passenger-card">
-
-              <h4>Passenger {index + 1}</h4>
-
-              <input
-                placeholder="First Name"
-                value={p.firstName}
-                onChange={(e) =>
-                  handleInputChange(index, "firstName", e.target.value)
-                }
-              />
-
-              <input
-                placeholder="Last Name"
-                value={p.lastName}
-                onChange={(e) =>
-                  handleInputChange(index, "lastName", e.target.value)
-                }
-              />
-
-              <input
-                placeholder="Email"
-                value={p.email}
-                onChange={(e) =>
-                  handleInputChange(index, "email", e.target.value)
-                }
-              />
-
-              <input
-                placeholder="Phone"
-                value={p.phone}
-                onChange={(e) =>
-                  handleInputChange(index, "phone", e.target.value)
-                }
-              />
-
-              <input
-                placeholder="Passport Number"
-                value={p.passport}
-                onChange={(e) =>
-                  handleInputChange(index, "passport", e.target.value)
-                }
-              />
-
-              <input
-                type="date"
-                value={p.dob}
-                onChange={(e) =>
-                  handleInputChange(index, "dob", e.target.value)
-                }
-              />
-
+              <div id="seatContainer" className="seat-container">
+                {!currentSeatData && seatMaps && (
+                  <p>Seat map not found for this aircraft.</p>
+                )}
+                {currentSeatData &&
+                  Array.from({ length: currentSeatData.rows }, (_, i) => i + 1).map(
+                    (row) => (
+                      <div key={row} className="seat-row">
+                        <div className="row-number">{row}</div>
+                        {currentSeatData.columns.flatMap((col) => {
+                          const seatNumber = `${row}${col}`;
+                          const occupied =
+                            currentSeatData.occupied?.includes(seatNumber);
+                          const isBusiness =
+                            currentSeatData.businessRows?.includes(row);
+                          const isExit =
+                            currentSeatData.exitRows?.includes(row);
+                          const isSelected = selectedSeats.includes(seatNumber);
+                          const afterThisCol =
+                            currentSeatData.aisleAfter?.includes(col);
+                          const seatEl = (
+                            <div
+                              key={col}
+                              className={[
+                                "seat",
+                                occupied ? "occupied" : "available",
+                                !occupied && isBusiness ? "business" : "",
+                                !occupied && isExit ? "exit" : "",
+                                isSelected ? "selected" : "",
+                              ]
+                                .filter(Boolean)
+                                .join(" ")}
+                              role={occupied ? undefined : "button"}
+                              tabIndex={occupied ? undefined : 0}
+                              onClick={() =>
+                                !occupied && selectSeat(seatNumber)
+                              }
+                              onKeyDown={(e) => {
+                                if (
+                                  !occupied &&
+                                  (e.key === "Enter" || e.key === " ")
+                                ) {
+                                  e.preventDefault();
+                                  selectSeat(seatNumber);
+                                }
+                              }}
+                            />
+                          );
+                          if (afterThisCol) {
+                            return [
+                              seatEl,
+                              <div
+                                key={`${col}-aisle`}
+                                className="aisle-gap"
+                              />,
+                            ];
+                          }
+                          return [seatEl];
+                        })}
+                      </div>
+                    )
+                  )}
+              </div>
             </div>
-          ))}
+            <div className="right-panel">
+              <div className="summary-card">
+                <h3>Your Selection</h3>
+                <p id="selectedSeatText">
+                  {selectedSeats.length === 0
+                    ? "No seats selected"
+                    : `Seats: ${selectedSeats.join(", ")}`}
+                </p>
+                <hr />
+                <div className="price-row">
+                  <span>Base fare</span>
+                  <span id="baseFare">${baseFare}</span>
+                </div>
+                <div className="price-row">
+                  <span>Seat upgrades</span>
+                  <span id="seatUpgrade">${seatUpgrade}</span>
+                </div>
+                <hr />
+                <div className="price-row total">
+                  <span>Total per passenger</span>
+                  <span id="totalPrice">${totalPerPassengerDisplay}</span>
+                </div>
+              </div>
+              <form id="bookingForm" onSubmit={handleContinue}>
+                <div id="passengerFormsContainer">
+                  {passengerForms.map((p, i) => (
+                    <div key={i} className="passenger-card">
+                      <h3>Passenger {i + 1}</h3>
+                      <div className="form-row">
+                        <div className="firstname">
+                          <p>First Name</p>
+                          <input
+                            type="text"
+                            placeholder="e.g. John"
+                            required
+                            value={p.firstName}
+                            onChange={(e) =>
+                              updatePassenger(i, "firstName", e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className="lastname">
+                          <p>Last Name</p>
+                          <input
+                            type="text"
+                            placeholder="e.g. doe"
+                            required
+                            value={p.lastName}
+                            onChange={(e) =>
+                              updatePassenger(i, "lastName", e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="form-row">
+                        <div className="email">
+                          <p>Email</p>
+                          <input
+                            type="email"
+                            placeholder="e.g. 8sKdF@example.com"
+                            required
+                            value={p.email}
+                            onChange={(e) =>
+                              updatePassenger(i, "email", e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className="phone">
+                          <p>Phone</p>
+                          <input
+                            type="tel"
+                            placeholder="e.g. +1234567890"
+                            required
+                            value={p.phone}
+                            onChange={(e) =>
+                              updatePassenger(i, "phone", e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="form-row">
+                        <div className="passport">
+                          <p>Passport Number</p>
+                          <input
+                            type="text"
+                            placeholder="Passport Number"
+                            required
+                            value={p.passport}
+                            onChange={(e) =>
+                              updatePassenger(i, "passport", e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className="dob">
+                          <p>Date of Birth</p>
+                          <input
+                            type="date"
+                            required
+                            value={p.dob}
+                            onChange={(e) =>
+                              updatePassenger(i, "dob", e.target.value)
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  id="bookButton"
+                  type="submit"
+                  className="continue-btn"
+                >
+                  Continue to Booking
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-
-        </div>
-
-      </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }
