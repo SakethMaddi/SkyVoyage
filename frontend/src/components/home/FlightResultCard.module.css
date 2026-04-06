@@ -1,0 +1,129 @@
+.card {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.airline {
+  font-weight: 600;
+  font-size: 16px;
+  width: 20%;
+}
+
+.timeBlock {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding-left: 50px;
+}
+
+.timeBlock h3 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.timeBlock span {
+  font-size: 14px;
+  color: #666;
+}
+
+.duration {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.line {
+  display: flex;
+  border: 1px solid #555;
+  width: 20vw;
+  position: relative;
+  margin: 8px 0;
+  min-width: 120px;
+}
+
+.dotBase {
+  position: absolute;
+  border: 5px solid #555;
+  border-radius: 50%;
+  top: -5px;
+}
+
+.dotStart {
+  left: 0;
+  transform: translateX(-50%);
+}
+
+.dotMid {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dotEnd {
+  left: 100%;
+  transform: translateX(-50%);
+}
+
+.price {
+  text-align: right;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.price p {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.selectBtn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #2b6ef5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.selectBtn:hover {
+  background: #1f57c5;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .airline {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+  }
+
+  .timeBlock {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .duration {
+    text-align: left;
+  }
+
+  .line {
+    width: 100%;
+  }
+}

@@ -1,128 +1,107 @@
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import mongoose from "mongoose";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+import authRoutes from "./routes/authRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
 
-require("dotenv").config();
-
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/skyvoyage";
+const SESSION_SECRET = process.env.SESSION_SECRET || "skyvoyage-dev-secret-change-me";
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
 
-
-app.use(cors());
+app.use(
+  cors({
+    origin: FRONTEND_ORIGIN,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
+await mongoose.connect(MONGODB_URI);
+console.log("MongoDB connected");
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected ✅"))
-  .catch((err) => console.error("MongoDB Error:", err));
+app.use(
+  session({
+    name: "skyvoyage.sid",
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: MONGODB_URI,
+      ttl: 14 * 24 * 60 * 60,
+    }),
+    cookie: {
+      httpOnly: true,
+      maxAge: 14 * 24 * 60 * 60 * 1000,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
+  })
+);
 
+const dataDir = path.join(__dirname, "data");
 
-const Booking = require("./models/booking.model");
+function readJsonFile(filename) {
+  const full = path.join(dataDir, filename);
+  const raw = fs.readFileSync(full, "utf8");
+  return JSON.parse(raw);
+}
 
-
-const flights = require("./data/flights.json");
-const seatMaps = require("./data/seat-maps.json");
-const promos = require("./data/promos.json");
-const airports = require("./data/airports.json");
-
+app.use("/api/auth", authRoutes);
+app.use("/api/session", sessionRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 app.get("/api/flights", (req, res) => {
   try {
-    res.json(flights);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch flights" });
+    const flights = readJsonFile("flights.json");
+    const withNumber = flights.map((f) => ({
+      ...f,
+      flightNumber: f.flightNumber || f.id,
+    }));
+    res.json(withNumber);
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load flights" });
   }
 });
-
-
-app.get("/api/seats", (req, res) => {
-  try {
-    res.json(seatMaps);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch seat maps" });
-  }
-});
-
-
-app.get("/api/promos", (req, res) => {
-  try {
-    res.json(promos);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch promos" });
-  }
-});
-
 
 app.get("/api/airports", (req, res) => {
   try {
-    res.json(airports);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch airports" });
+    res.json(readJsonFile("airports.json"));
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load airports" });
   }
 });
 
-
-app.get("/api/airports/search", (req, res) => {
-  const query = req.query.q?.toLowerCase() || "";
-
-  const results = airports.filter((a) =>
-    a.code.toLowerCase().includes(query) ||
-    a.city.toLowerCase().includes(query) ||
-    a.name.toLowerCase().includes(query)
-  );
-
-  res.json(results);
-});
-
-
-app.post("/api/book", async (req, res) => {
+app.get("/api/promos", (req, res) => {
   try {
-    const bookingData = req.body;
-
-    if (!bookingData.flight || !bookingData.passengers || !bookingData.seats) {
-      return res.status(400).json({
-        error: "Invalid booking data"
-      });
-    }
-
-    const booking = new Booking(bookingData);
-
-    await booking.save();
-
-    res.json({
-      success: true,
-      message: "Booking saved successfully",
-      booking
-    });
-
-  } catch (err) {
-    res.status(500).json({
-      error: "Failed to save booking"
-    });
+    res.json(readJsonFile("promos.json"));
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load promos" });
   }
 });
 
-
-app.get("/api/bookings", async (req, res) => {
+app.get("/api/seat-maps", (req, res) => {
   try {
-    const bookings = await Booking.find().sort({ createdAt: -1 });
-    res.json(bookings);
-  } catch (err) {
-    res.status(500).json({
-      error: "Failed to fetch bookings"
-    });
+    res.json(readJsonFile("seat-maps.json"));
+  } catch (e) {
+    res.status(500).json({ error: "Failed to load seat maps" });
   }
 });
 
-
-app.get("/", (req, res) => {
-  res.send("🚀 SkyVoyage Backend with MongoDB is running!");
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true });
 });
-
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`SkyVoyage API at http://localhost:${PORT}`);
 });

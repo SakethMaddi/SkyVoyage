@@ -1,0 +1,69 @@
+.container {
+  background: white;
+  padding: 40px;
+  width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 60px auto;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #2b10b2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #1f0d8a;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.switch {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.switch a {
+  color: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}

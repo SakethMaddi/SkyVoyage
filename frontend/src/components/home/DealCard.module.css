@@ -1,0 +1,72 @@
+.dealCard {
+  flex: 0 0 31%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  font: inherit;
+}
+
+.dealCard:hover {
+  transform: translateY(-4px);
+}
+
+.cardTop {
+  padding: 10px;
+}
+
+.cardTop h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cardTop p {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.tag {
+  padding: 5px;
+  border-radius: 25px;
+  display: flex;
+  justify-self: end;
+  background-color: #dbe7f5;
+  font-size: 0.65rem;
+  color: #1e293b;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.cardBottom {
+  background-color: white;
+  color: #1d4ed8;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 0.75rem;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.cardBottom p {
+  color: black;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .dealCard {
+    flex: 0 0 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .dealCard {
+    flex: 0 0 48%;
+  }
+}

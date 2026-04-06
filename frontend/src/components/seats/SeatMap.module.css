@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.rowNumber {
+  width: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.seat {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 2px solid #cbd5e1;
+  text-align: center;
+  line-height: 31px;
+  font-size: 0.65rem;
+  cursor: pointer;
+  background: white;
+  transition: 0.2s;
+  padding: 0;
+}
+
+.seat:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.available {
+  border-color: #3b82f6;
+}
+
+.selected {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.occupied {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.business {
+  border-color: #a855f7;
+}
+
+.exit {
+  border-color: #16a34a;
+}
+
+.aisleGap {
+  width: 30px;
+}

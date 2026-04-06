@@ -1,0 +1,29 @@
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.container {
+  width: 70%;
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.container h1 {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.empty {
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,48 @@
+.filters {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.group h4 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.applyBtn {
+  font-size: 0.75rem;
+  padding: 6px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #2563eb;
+  color: #1f57c5;
+  margin-top: 12px;
+  font-weight: 600;
+  width: 80%;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .applyBtn {
+    margin: 6% 0;
+    width: 100%;
+  }
+}

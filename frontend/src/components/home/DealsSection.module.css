@@ -1,0 +1,37 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4%;
+}
+
+.section h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.subtitle {
+  color: black;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+  align-items: stretch;
+  padding-top: 5%;
+  width: 86%;
+}
+
+.error {
+  padding: 24px;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 8%;
+  }
+}

@@ -1,0 +1,102 @@
+.header {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  width: 74%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.headerLogo {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plane {
+  width: 28px;
+  height: 20px;
+  border-radius: 40%;
+}
+
+.headMenu {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  gap: 40px;
+  font-size: 1rem;
+  align-items: center;
+}
+
+.hMenu {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  opacity: 0.65;
+  font-size: 0.86rem;
+}
+
+.hMenu:hover {
+  color: black;
+  opacity: 1;
+}
+
+.hMenuActive {
+  color: #2563eb;
+  border-bottom: 2px solid #1d4ed8;
+  opacity: 1;
+}
+
+.navUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.logoutBtn {
+  background-color: transparent;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.86rem;
+}
+
+.navBarTight {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+    padding: 8px;
+    gap: 12px;
+  }
+
+  .headMenu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+}

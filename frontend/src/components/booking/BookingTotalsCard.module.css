@@ -1,0 +1,29 @@
+.box {
+  margin-top: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.discount {
+  padding-bottom: 10px;
+}
+
+.final {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.final h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}

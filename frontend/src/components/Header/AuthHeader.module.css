@@ -1,0 +1,52 @@
+.wrap {
+  background: white;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  width: 74%;
+  margin: 0 auto;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.headerLogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #2b10b2;
+}
+
+.plane {
+  width: 28px;
+  height: 20px;
+}
+
+.headMenu {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.hMenu {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.hMenuActive {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    width: 100%;
+    padding: 0 12px;
+  }
+}

@@ -1,0 +1,58 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+  box-shadow: 4px 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 8% 5%;
+  border-radius: 10px;
+}
+
+.box h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.76;
+  margin-bottom: 6px;
+}
+
+.input {
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid #87838385;
+  width: 100%;
+}
+
+.inputOk {
+  border: 2px solid #2e7d32;
+}
+
+.inputBad {
+  border: 2px solid #e53935;
+}
+
+.error {
+  color: #e53935;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.expRow {
+  display: flex;
+  gap: 5%;
+  flex-wrap: wrap;
+}
+
+.expRow .field {
+  flex: 1;
+  min-width: 140px;
+}

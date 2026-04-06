@@ -1,0 +1,98 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: white;
+  box-shadow: 4px 6px 18px rgba(0, 0, 0, 0.06);
+  padding: 3% 3%;
+  border-radius: 10px;
+}
+
+.wrap h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.inner {
+  margin-top: 8px;
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+}
+
+.codes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 6%;
+}
+
+.cityBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 6px;
+  align-self: center;
+}
+
+.code {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.city {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.flightInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.8;
+  gap: 8px;
+  padding: 6%;
+}
+
+.line {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 12px 0;
+}
+
+.label {
+  padding: 8px 0;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  font-weight: 500;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.fairRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.base {
+  padding-top: 10px;
+}
